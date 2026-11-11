@@ -1,0 +1,1889 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style id="eas-llicencia-css">
+/* Peu de llicència unificat i declaració d'ús d'IA (mateix model que la web principal) */
+.eas-llicencia{margin:0;line-height:1.7}
+.eas-llicencia img{width:1em;height:1em;margin-left:.2em;vertical-align:-.15em}
+.eas-autoria{background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}
+.eas-autoria:hover{color:#EA5B0C}
+.eas-autoria:focus-visible,.eas-tanca:focus-visible{outline:3px solid #EA5B0C;outline-offset:2px;border-radius:4px}
+.eas-ia{margin:auto;max-width:min(34rem,calc(100% - 2rem));padding:1.4rem 1.6rem;background:#FAFAF7;color:#1A1814;border:2px solid #EA5B0C;border-radius:16px;box-shadow:0 20px 50px rgba(20,18,15,.35);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1rem;line-height:1.6;text-align:left}
+.eas-ia::backdrop{background:rgba(20,18,15,.55)}
+.eas-ia p{margin:0 0 1rem;max-width:none;color:#1A1814}
+.eas-ia strong{color:#AC3E00}
+.eas-tanca{font:500 .85rem/1 ui-monospace,Consolas,monospace;background:#EA5B0C;color:#14120F;border:0;border-radius:999px;padding:.6rem 1.1rem;cursor:pointer}
+.eas-tanca:hover{background:#FF6E1A}
+.eas-ia.eas-fb{position:fixed;inset:0;height:fit-content;z-index:1000}
+@media print{.eas-ia{display:none!important}}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .eas-llicencia img{filter:invert(88%)} }
+:root[data-theme="dark"] .eas-llicencia img{filter:invert(88%)}
+</style>
+</head><body>
+<title>Logaritmes 5E</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: quadern quadriculat; capçalera amb la tesi, navegació 5E en seqüència, una columna de lectura (max 860px) */
+:root {
+  --paper: #f5f7fc; --sheet: #ffffff; --ink: #172038; --muted: #56607a; --line: #d6dbea; --grid: rgba(46, 82, 178, .075);
+  --accent: #2e52b2; --accent-ink: #ffffff; --soft: #eaeffb;
+  --p1: #b4530a; --p2: #0e7468; --p3: #2049c9; --p4: #7434d6; --p5: #b8195e;
+  --ok: #15803d; --ok-bg: #e7f5ec; --ko: #b42318; --ko-bg: #fdeceb; --warn: #95600a; --warn-bg: #fdf5e1;
+  --display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --body: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #0e1322; --sheet: #151b2e; --ink: #e6e9f3; --muted: #9ca5bf; --line: #2a3352; --grid: rgba(140, 165, 255, .06);
+  --accent: #8fa8ff; --accent-ink: #0e1322; --soft: #1c2440;
+  --p1: #f2a33a; --p2: #39cdb9; --p3: #84a6ff; --p4: #b996ff; --p5: #f26fa8;
+  --ok: #5ad48a; --ok-bg: #10291b; --ko: #ff8a80; --ko-bg: #2e1515; --warn: #f3c552; --warn-bg: #2a230f;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --paper: #0e1322; --sheet: #151b2e; --ink: #e6e9f3; --muted: #9ca5bf; --line: #2a3352; --grid: rgba(140, 165, 255, .06);
+  --accent: #8fa8ff; --accent-ink: #0e1322; --soft: #1c2440;
+  --p1: #f2a33a; --p2: #39cdb9; --p3: #84a6ff; --p4: #b996ff; --p5: #f26fa8;
+  --ok: #5ad48a; --ok-bg: #10291b; --ko: #ff8a80; --ko-bg: #2e1515; --warn: #f3c552; --warn-bg: #2a230f;
+  color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body {
+  background-color: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--sheet); }
+.wrap { max-width: 860px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 800; letter-spacing: -.01em; }
+h3 { font-size: 1.25rem; font-weight: 700; }
+p { margin: 0; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* capçalera */
+.top { background: var(--sheet); border-bottom: 1px solid var(--line); }
+.top .wrap { padding-block: 28px 22px; display: grid; grid-template-columns: 1fr auto; gap: 12px 24px; align-items: end; }
+.kicker { font-family: var(--mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.top h1 { font-size: clamp(2.3rem, 7vw, 3.6rem); font-weight: 800; letter-spacing: -.02em; }
+.top h1 span { color: var(--accent); }
+.thesis { font-size: 1.25rem; color: var(--ink); padding: 10px 16px; border: 1px dashed var(--line); border-radius: 10px; background: var(--paper); min-width: 0; overflow-x: auto; }
+@media (max-width: 640px) { .top .wrap { grid-template-columns: 1fr; } .thesis { justify-self: start; } }
+
+/* navegació de fases */
+.phases { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--sheet); border-bottom: 1px solid var(--line); }
+.phases ol { list-style: none; margin: 0 auto; max-width: 860px; display: flex; gap: 4px; overflow-x: auto; padding-block: 8px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); scrollbar-width: thin; }
+.phases a { display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: 999px; text-decoration: none; color: var(--ink); white-space: nowrap; border: 1px solid transparent; }
+.phases a:hover { background: var(--soft); }
+.phases a[aria-current="page"] { border-color: var(--c); background: var(--soft); }
+.phases .n { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: .9rem; background: var(--c); color: var(--sheet); }
+.phases .lbl { display: flex; flex-direction: column; line-height: 1.1; }
+.phases .lbl b { font-family: var(--display); font-weight: 700; font-size: .98rem; }
+.phases .lbl small { font-family: var(--mono); font-size: .68rem; color: var(--muted); letter-spacing: .03em; }
+
+/* vistes */
+main .wrap { padding-block: 32px 48px; }
+.view { display: grid; gap: 28px; }
+.view-head { display: grid; gap: 8px; }
+.eyebrow { font-family: var(--mono); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ph, var(--accent)); font-weight: 600; }
+.lead { font-size: 1.12rem; color: var(--muted); max-width: 65ch; }
+.view[data-ph="1"] { --ph: var(--p1); } .view[data-ph="2"] { --ph: var(--p2); } .view[data-ph="3"] { --ph: var(--p3); }
+.view[data-ph="4"] { --ph: var(--p4); } .view[data-ph="5"] { --ph: var(--p5); }
+.block { background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 14px; min-width: 0; }
+.block > h3 { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ph, var(--accent)); border: 1px solid currentColor; border-radius: 4px; padding: 1px 6px; font-weight: 600; }
+.prose { display: grid; gap: 10px; max-width: 68ch; }
+.prose ul, .prose ol { margin: 0; padding-left: 1.3em; display: grid; gap: 4px; }
+.mathbox { overflow-x: auto; padding: 4px 0; }
+.note { border-left: 4px solid var(--warn); background: var(--warn-bg); padding: 12px 16px; border-radius: 0 8px 8px 0; display: grid; gap: 6px; }
+.note b.t { font-family: var(--display); color: var(--warn); }
+.key { border-left: 4px solid var(--ph, var(--accent)); background: var(--soft); padding: 12px 16px; border-radius: 0 8px 8px 0; display: grid; gap: 6px; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .97rem; }
+th, td { border-bottom: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: middle; }
+th { font-family: var(--mono); font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.num, .tab { font-variant-numeric: tabular-nums; }
+code, kbd { font-family: var(--mono); font-size: .9em; background: var(--soft); padding: 1px 6px; border-radius: 4px; }
+
+/* botons */
+.btn { font: inherit; font-weight: 700; font-size: .95rem; border-radius: 8px; padding: 8px 16px; border: 1px solid var(--line); background: var(--sheet); color: var(--ink); cursor: pointer; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.linkbtn { font: inherit; font-size: .92rem; background: none; border: 0; color: var(--accent); cursor: pointer; padding: 2px 0; text-decoration: underline; text-underline-offset: 3px; }
+.linkbtn:disabled { color: var(--muted); text-decoration: none; cursor: not-allowed; opacity: .7; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+/* opció múltiple */
+.mc { display: grid; gap: 10px; }
+.mc .qtext { font-weight: 700; }
+.opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; }
+.opt { font: inherit; text-align: left; padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--sheet); color: var(--ink); cursor: pointer; min-width: 0; overflow-x: auto; }
+.opt:hover:not(:disabled) { border-color: var(--accent); background: var(--soft); }
+.opt.right { border-color: var(--ok); background: var(--ok-bg); }
+.opt.wrong { border-color: var(--ko); background: var(--ko-bg); }
+.opt:disabled { cursor: default; }
+.fb { padding: 10px 14px; border-radius: 8px; font-size: .97rem; }
+.fb.ok { background: var(--ok-bg); color: var(--ink); border: 1px solid var(--ok); }
+.fb.ko { background: var(--ko-bg); color: var(--ink); border: 1px solid var(--ko); }
+.fb.warn { background: var(--warn-bg); color: var(--ink); border: 1px solid var(--warn); }
+.fb b { font-family: var(--display); }
+.fb.ok b { color: var(--ok); } .fb.ko b { color: var(--ko); } .fb.warn b { color: var(--warn); }
+
+/* control lliscant */
+.ctrl { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; }
+.ctrl label { font-weight: 700; min-width: 4.5em; }
+.ctrl output { font-family: var(--mono); font-variant-numeric: tabular-nums; min-width: 3.5em; text-align: right; }
+input[type="range"] { width: 100%; accent-color: var(--ph, var(--accent)); }
+input[type="number"], input[type="text"], textarea { font: inherit; color: var(--ink); background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+textarea { width: 100%; min-height: 90px; resize: vertical; }
+
+/* hort */
+.garden { display: grid; grid-template-columns: minmax(0, 240px) 1fr; gap: 20px; align-items: center; }
+.garden svg { width: 100%; max-width: 240px; height: auto; }
+.readout { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 1.05rem; display: grid; gap: 4px; }
+.readout .big { font-size: 1.6rem; font-family: var(--display); font-weight: 800; }
+@media (max-width: 560px) { .garden { grid-template-columns: 1fr; } .garden svg { max-width: 220px; } }
+
+/* detectiu de propietats */
+.prop-table td:first-child { min-width: 170px; }
+.eq { font-family: var(--mono); font-weight: 600; }
+.eq.yes { color: var(--ok); } .eq.no { color: var(--ko); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { font: inherit; font-size: .85rem; border: 0; background: var(--sheet); color: var(--ink); padding: 5px 10px; cursor: pointer; white-space: nowrap; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button.on-ok { background: var(--ok-bg); color: var(--ok); font-weight: 700; }
+.seg button.on-ko { background: var(--ko-bg); color: var(--ko); font-weight: 700; }
+
+/* passos */
+.steps { display: grid; gap: 6px; }
+.steps .step { overflow-x: auto; }
+
+/* sessions */
+.sessions { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.session { border: 1px solid var(--line); border-radius: 10px; padding: 14px; background: var(--sheet); display: grid; gap: 6px; align-content: start; }
+.session .sn { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.session ul { margin: 0; padding-left: 0; list-style: none; font-size: .95rem; display: grid; gap: 2px; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
+
+/* exercicis */
+.filters { display: grid; gap: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: .88rem; border: 1px solid var(--line); background: var(--sheet); color: var(--ink); padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ph, var(--accent)); color: var(--sheet); border-color: var(--ph, var(--accent)); font-weight: 700; }
+.progress { display: grid; gap: 6px; }
+.bar { height: 10px; background: var(--soft); border-radius: 999px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--ph, var(--accent)); width: 0; transition: width .4s; }
+.exlist { display: grid; gap: 16px; }
+.ex { background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 12px; min-width: 0; }
+.ex.done { border-color: var(--ok); }
+.ex-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: .82rem; }
+.ex-id { font-family: var(--display); font-weight: 800; font-size: 1.05rem; }
+.lvl { font-family: var(--mono); font-size: .72rem; letter-spacing: .05em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+.lvl.l1 { background: var(--ok-bg); color: var(--ok); } .lvl.l2 { background: var(--warn-bg); color: var(--warn); } .lvl.l3 { background: var(--ko-bg); color: var(--ko); }
+.blkname { color: var(--muted); }
+.donebadge { margin-left: auto; color: var(--ok); font-weight: 700; }
+.ex .q { font-size: 1.15rem; overflow-x: auto; padding: 4px 0; }
+.ans { display: flex; gap: 8px; flex-wrap: wrap; }
+.ans input { flex: 1 1 220px; min-width: 0; font-family: var(--mono); font-size: 1.05rem; }
+.kbd { display: flex; flex-wrap: wrap; gap: 4px; }
+.kbd button { font-family: var(--mono); font-size: .92rem; min-width: 40px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); color: var(--ink); cursor: pointer; }
+.kbd button:hover { border-color: var(--accent); }
+.preview { font-size: .92rem; color: var(--muted); min-height: 1.6em; overflow-x: auto; }
+.preview .pv { color: var(--ink); }
+.preview:empty { display: none; }
+.tools { display: flex; gap: 16px; flex-wrap: wrap; }
+.hint, .sol { padding: 10px 14px; border-radius: 8px; background: var(--soft); overflow-x: auto; }
+.sol { border: 1px dashed var(--line); }
+
+/* autoavaluació */
+.self { display: grid; gap: 10px; }
+.self-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.light { display: inline-flex; gap: 6px; }
+.light button { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--line); background: var(--sheet); cursor: pointer; display: grid; place-items: center; font-weight: 700; font-size: .8rem; color: var(--muted); }
+.light button[data-v="g"].on { background: var(--ok); border-color: var(--ok); color: var(--sheet); }
+.light button[data-v="y"].on { background: var(--warn); border-color: var(--warn); color: var(--sheet); }
+.light button[data-v="r"].on { background: var(--ko); border-color: var(--ko); color: var(--sheet); }
+@media (max-width: 520px) { .self-row { grid-template-columns: 1fr; } }
+.score { font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--ph); }
+
+/* peu */
+footer { border-top: 1px solid var(--line); background: var(--sheet); }
+footer .wrap { padding-block: 22px 28px; display: grid; gap: 8px; font-size: .92rem; color: var(--muted); }
+footer .linkbtn { font-size: inherit; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+<style>
+/* Afegits per a Logaritmes: etiqueta de Batxillerat, gràfiques i selector de curs */
+.tag.b, .curb { color: var(--p4); }
+.curb { font-family: var(--mono); font-size: .7rem; letter-spacing: .05em; text-transform: uppercase; border: 1px solid currentColor; border-radius: 4px; padding: 1px 6px; font-weight: 600; white-space: nowrap; }
+.plot { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: 20px; align-items: center; }
+.plot > svg { width: 100%; max-width: 340px; height: auto; display: block; touch-action: pan-y; }
+p.prose { display: block; }
+.block > *, .key > *, .note > *, .view > *, .exlist > * { min-width: 0; }
+.prose p + p { margin-top: 0; }
+@media (max-width: 600px) { .plot { grid-template-columns: 1fr; } .plot > svg { max-width: 100%; } }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .92rem; }
+.legend i { display: inline-block; width: 18px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+.big-out { font-size: 1.25rem; overflow-x: auto; overflow-y: hidden; padding: 6px 0; }
+.ex-head .curb { margin-left: 2px; }
+</style>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  svg: { fontCache: 'global' },
+  options: { enableMenu: false }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg-full.js"></script>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <p class="kicker">4t d'ESO · Matemàtiques I · Matemàtiques aplicades a les Ciències Socials (MACS I) · Seqüència 5E</p>
+      <h1>Logaritmes<span>.</span></h1>
+    </div>
+    <div class="thesis">\(\log_a x=y \;\Longleftrightarrow\; a^y=x\)</div>
+  </div>
+</header>
+
+<nav class="phases" aria-label="Fases de la seqüència">
+  <ol>
+    <li><a href="#inici" data-v="inici" style="--c: var(--muted)"><span class="n">0</span><span class="lbl"><b>Inici</b><small>Guia</small></span></a></li>
+    <li><a href="#implica" data-v="implica" style="--c: var(--p1)"><span class="n">1</span><span class="lbl"><b>Implica't</b><small>Sessió 1</small></span></a></li>
+    <li><a href="#explora" data-v="explora" style="--c: var(--p2)"><span class="n">2</span><span class="lbl"><b>Explora</b><small>Sessions 1–2</small></span></a></li>
+    <li><a href="#explica" data-v="explica" style="--c: var(--p3)"><span class="n">3</span><span class="lbl"><b>Explica</b><small>Sessions 3–6</small></span></a></li>
+    <li><a href="#aplica" data-v="aplica" style="--c: var(--p4)"><span class="n">4</span><span class="lbl"><b>Aplica</b><small>Sessions 3–6 · casa</small></span></a></li>
+    <li><a href="#avalua" data-v="avalua" style="--c: var(--p5)"><span class="n">5</span><span class="lbl"><b>Avalua</b><small>Sessió 6</small></span></a></li>
+  </ol>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ================= INICI ================= -->
+<section class="view" id="v-inici" data-ph="0">
+  <div class="view-head">
+    <p class="eyebrow">Abans de començar</p>
+    <h2>Com funciona aquesta seqüència</h2>
+    <p class="lead">Descobriràs els logaritmes a partir de problemes reals: estalvis, terratrèmols, l'acidesa d'un suc… En totes aquestes situacions la incògnita és un <b>exponent</b>, i el logaritme és l'eina que permet trobar-lo.</p>
+  </div>
+
+  <div class="block">
+    <h3>Quin curs fas?</h3>
+    <p class="prose">Tria el teu curs. Els continguts marcats amb <span class="curb">Batx</span> són de Batxillerat: a 4t d'ESO són ampliació. Pots canviar-ho quan vulguis.</p>
+    <div class="chips" id="curPick" aria-label="Curs"></div>
+    <p class="prose" id="curMsg" style="font-size:.95rem;color:var(--muted)"></p>
+  </div>
+
+  <div class="block">
+    <h3>Què aprendràs</h3>
+    <ul class="prose" style="padding-left:1.2em">
+      <li>Què és un logaritme i per què el necessitem: trobar l'exponent d'una potència.</li>
+      <li>Calcular logaritmes amb la definició, i logaritmes decimals amb la calculadora. Els neperians (\(\ln\)), a <span class="curb">Batx</span>.</li>
+      <li>Relacionar les gràfiques de \(y=a^x\) i \(y=\log_a x\).</li>
+      <li>Aplicar les propietats dels logaritmes (producte, quocient, potència i arrel).</li>
+      <li>Fer servir el canvi de base.</li>
+      <li>Resoldre equacions exponencials i logarítmiques, i comprovar-ne les solucions.</li>
+      <li>Resoldre problemes de context: interès compost, depreciació, creixement de poblacions, escala de Richter, pH i decibels.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h3>Pla de les sis sessions</h3>
+    <div class="sessions">
+      <div class="session"><span class="sn">Sessió 1</span>
+        <ul><li><span class="dot" style="background:var(--p1)"></span>Implica't (25 min)</li><li><span class="dot" style="background:var(--p2)"></span>Explora: activitat 1 (30 min)</li></ul></div>
+      <div class="session"><span class="sn">Sessió 2</span>
+        <ul><li><span class="dot" style="background:var(--p2)"></span>Explora: activitats 2 i 3</li><li><span class="dot" style="background:var(--p2)"></span>Conclusions i posada en comú</li></ul></div>
+      <div class="session"><span class="sn">Sessió 3</span>
+        <ul><li><span class="dot" style="background:var(--p3)"></span>Explica, apartats 1–2</li><li><span class="dot" style="background:var(--p4)"></span>Aplica: blocs A i B</li></ul></div>
+      <div class="session"><span class="sn">Sessió 4</span>
+        <ul><li><span class="dot" style="background:var(--p3)"></span>Explica, apartats 3–4</li><li><span class="dot" style="background:var(--p4)"></span>Aplica: blocs C i D</li></ul></div>
+      <div class="session"><span class="sn">Sessió 5</span>
+        <ul><li><span class="dot" style="background:var(--p3)"></span>Explica, apartats 5–6</li><li><span class="dot" style="background:var(--p4)"></span>Aplica: blocs E i F</li></ul></div>
+      <div class="session"><span class="sn">Sessió 6</span>
+        <ul><li><span class="dot" style="background:var(--p3)"></span>Explica, apartat 7</li><li><span class="dot" style="background:var(--p4)"></span>Aplica: bloc G (25 min)</li><li><span class="dot" style="background:var(--p5)"></span>Avalua (25 min)</li></ul></div>
+    </div>
+    <p class="lead" style="font-size:1rem">A casa: exercicis de nivell 2 i 3 en línia i els exercicis de la llibreta (els trobaràs al final d'Aplica).</p>
+  </div>
+
+  <div class="block">
+    <h3>Com escriure les respostes</h3>
+    <p class="prose">Escriu amb el teclat o fes servir els botons que hi ha sota de cada resposta. A sota veuràs com interpreta la pàgina el que has escrit: comprova-ho abans de prémer <b>Comprova</b>.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Vols escriure</th><th>Escriu</th><th>Botó</th></tr></thead>
+      <tbody>
+        <tr><td>\(\tfrac{2}{3}\), \(-\tfrac{11}{3}\)</td><td><code>2/3</code>, <code>-11/3</code></td><td><code>/</code></td></tr>
+        <tr><td>\(\log 5\)</td><td><code>log5</code> o <code>log(5)</code></td><td><code>log( )</code></td></tr>
+        <tr><td>\(\ln 3\)</td><td><code>ln3</code></td><td><code>ln( )</code></td></tr>
+        <tr><td>\(\log_2 7\)</td><td><code>log_2(7)</code></td><td><code>logₐ( )</code></td></tr>
+        <tr><td>\(\dfrac{\log 48}{\log 3}\)</td><td><code>log48/log3</code></td><td><code>/</code></td></tr>
+        <tr><td>\(1-3\log 2\)</td><td><code>1-3log2</code></td><td></td></tr>
+        <tr><td>\(\sqrt{3}\), \(\sqrt[3]{2}\)</td><td><code>√3</code>, <code>∛2</code></td><td><code>√( )</code> <code>∛( )</code></td></tr>
+        <tr><td>\(2^{\frac18}\)</td><td><code>2^(1/8)</code></td><td><code>^</code></td></tr>
+        <tr><td>\(3{,}98\cdot10^{-8}\)</td><td><code>3,98·10^-8</code></td><td><code>·</code> <code>^</code></td></tr>
+        <tr><td>Dues solucions</td><td><code>20; 80</code></td><td><code>;</code></td></tr>
+        <tr><td>Cap solució</td><td><code>cap</code></td><td></td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b class="t">Important</b><p>Els decimals s'escriuen amb <b>coma</b> (<code>13,73</code>) i les solucions se separen amb <b>punt i coma</b>. Si l'argument del logaritme té més d'un terme, posa'l entre parèntesis: <code>log(x+1)</code>. Si escrius <code>log x+1</code>, la pàgina entén \(\log x+1\). No facis servir punts de milers.</p></div>
+  </div>
+</section>
+
+<!-- ================= IMPLICA'T ================= -->
+<section class="view" id="v-implica" data-ph="1" hidden>
+  <div class="view-head">
+    <p class="eyebrow">Fase 1 · Implica't</p>
+    <h2>Quan la incògnita és un exponent</h2>
+    <p class="lead">Tres situacions reals en què hem de trobar un exponent. Resol-les i pensa per què amb les operacions que coneixes no n'hi ha prou.</p>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">Repte 1</span> Doblar els estalvis</h3>
+    <p class="prose">Poses 1 000 € en un compte al 5 % d'interès compost anual. Cada any el capital es multiplica per 1,05, i al cap de \(t\) anys tens \(C=1000\cdot1{,}05^t\) euros. <b>Quan tindràs exactament 2 000 €?</b> Mou el control o escriu un valor.</p>
+    <div class="plot">
+      <svg id="sPlot" viewBox="0 0 320 210" role="img" aria-label="Gràfica del capital en funció dels anys"></svg>
+      <div style="display:grid;gap:14px;min-width:0">
+        <div class="ctrl"><label for="sT">Anys</label><input type="range" id="sT" min="0" max="25" step="0.01" value="10"><output id="sTOut">10,00</output></div>
+        <div class="row"><label for="sTNum">Valor precís (anys):</label><input type="number" id="sTNum" min="0" max="25" step="0.0001" value="10" style="width:9em"></div>
+        <div class="readout"><span>Capital</span><span class="big" id="sCap">1 628,89 €</span><span id="sMsg" style="font-family:var(--body);font-size:.95rem;color:var(--muted)">Ens falten 371,11 €.</span></div>
+      </div>
+    </div>
+    <div class="row"><button class="btn" id="sReveal">Com ho podem calcular sense provar?</button></div>
+    <div class="key" id="sExplain" hidden>
+      <p>Hem de resoldre \(1{,}05^t=2\). La incògnita és a l'<b>exponent</b>: no la podem aïllar amb arrels ni amb cap operació que ja coneguis. Necessitem l'operació que respon la pregunta «a quin exponent he d'elevar 1,05 per obtenir 2?». Aquesta operació és el <b>logaritme</b>:</p>
+      <div class="mathbox">\[t=\log_{1{,}05}2=\frac{\log 2}{\log 1{,}05}\approx14{,}21\ \text{anys}\]</div>
+      <p>Compte amb la interpretació dins del context real: el banc abona els interessos un cop l'any, de manera que el capital supera els 2 000 € en complir-se <b>15 anys</b>. El valor 14,21 surt d'un càlcul matemàtic.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">Repte 2</span> Terratrèmols</h3>
+    <p class="prose">L'escala de Richter mesura la magnitud d'un terratrèmol a partir de l'amplitud de les ones sísmiques, \(A\):</p>
+    <div class="mathbox">\[M=\log\frac{A}{A_0}\]</div>
+    <p class="prose">El 1755 un terratrèmol de magnitud estimada entre 8,5 i 9 va destruir Lisboa; a Catalunya, de tant en tant, se'n noten de magnitud 4.</p>
+    <div class="mc" id="mcRichter"></div>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">Repte 3</span> Doblegar un full fins a la Lluna</h3>
+    <p class="prose">Un full de paper fa 0,1 mm de gruix. Cada vegada que el doblegues per la meitat, el gruix es duplica. Si es pogués doblegar tantes vegades com volguéssim, quants doblecs caldrien perquè el gruix superés la distància de la Terra a la Lluna, 384 000 km?</p>
+    <div class="mc" id="mcPaper"></div>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">Pensa i comparteix</span> Per a la posada en comú</h3>
+    <ol class="prose">
+      <li>Què tenen en comú els tres reptes? On és la incògnita en cada cas?</li>
+      <li>Per què creus que l'escala de Richter fa servir logaritmes en lloc de l'amplitud directament?</li>
+      <li>Si \(\sqrt[n]{\phantom{a}}\) desfà una potència quan coneixem l'exponent, què hauria de fer el logaritme?</li>
+    </ol>
+    <label for="thinkNote" class="sr">Les teves idees</label>
+    <textarea id="thinkNote" placeholder="Anota-hi les teves idees (només es guarden en aquest navegador)."></textarea>
+  </div>
+</section>
+
+<!-- ================= EXPLORA ================= -->
+<section class="view" id="v-explora" data-ph="2" hidden>
+  <div class="view-head">
+    <p class="eyebrow">Fase 2 · Explora</p>
+    <h2>Investiga com es comporten els logaritmes</h2>
+    <p class="lead">Experimenta amb els controls i fes-te preguntes. L'objectiu és que descobreixis tu les regles abans de llegir-les a l'apartat Explica.</p>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">Activitat 1</span> La màquina d'exponents</h3>
+    <p class="prose">Primer fes una predicció, sense calculadora:</p>
+    <div class="mc" id="mcPredict"></div>
+    <p class="prose">Ara tria una base i escriu un nombre. La màquina et diu a quin exponent cal elevar la base per obtenir el nombre. Pots escriure fraccions o arrels, com <code>1/8</code> o <code>√2</code>.</p>
+    <div class="chips" id="mBase" aria-label="Base"></div>
+    <div class="row"><label for="mX"><b>Nombre \(x\):</b></label><input type="text" id="mX" value="8" autocomplete="off" spellcheck="false" style="width:10em;font-family:var(--mono)"></div>
+    <div class="grid2">
+      <div class="key" style="--ph:var(--p2)"><span class="kicker">Logaritme</span><div class="big-out" id="mLog"></div></div>
+      <div class="key" style="--ph:var(--p2)"><span class="kicker">Potència equivalent</span><div class="big-out" id="mPow"></div></div>
+    </div>
+    <div class="note"><b class="t">Repte</b><p>Amb la base 2, troba el nombre exacte que té logaritme \(0\), el que té logaritme \(-3\) i el que té logaritme \(\tfrac12\). No cal anar provant decimals: pensa quina potència de 2 necessites i escriu-la com a fracció o com a arrel.</p><p>Què passa si escrius 0 o un nombre negatiu? Per què?</p></div>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">Activitat 2</span> Exponencial i logaritme: un mirall</h3>
+    <p class="prose">Mou la base \(a\) i el punt \(P\) de la corba exponencial. Observa on cau el punt \(Q\), que té les coordenades intercanviades.</p>
+    <div class="plot">
+      <svg id="gPlot" viewBox="0 0 300 300" role="img" aria-label="Gràfiques de y igual a a elevat a x i de y igual al logaritme en base a de x"></svg>
+      <div style="display:grid;gap:12px;min-width:0">
+        <div class="ctrl"><label for="gA">Base \(a\)</label><input type="range" id="gA" min="0.2" max="4" step="0.1" value="2"><output id="gAo">2</output></div>
+        <div class="ctrl"><label for="gT">Punt \(P\)</label><input type="range" id="gT" min="-2" max="2" step="0.05" value="1"><output id="gTo">1</output></div>
+        <div class="legend"><span><i style="background:var(--p1)"></i>\(y=a^x\)</span><span><i style="background:var(--p2)"></i>\(y=\log_a x\)</span><span><i style="background:var(--muted)"></i>\(y=x\)</span></div>
+        <div class="readout" id="gRead"></div>
+      </div>
+    </div>
+    <div class="mc" id="mcGraph"></div>
+    <div class="note"><b class="t">Observa i anota</b><p>Què passa amb les gràfiques quan \(a>1\)? I quan \(0\lt a\lt 1\)? Per què no deixa triar \(a=1\)? La gràfica del logaritme toca mai l'eix \(OY\)?</p></div>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">Activitat 3</span> Detectiu de propietats</h3>
+    <p class="prose">Algunes d'aquestes igualtats són certes per a qualsevol valor positiu de \(a\) i \(b\), i d'altres no (\(\log\) és el logaritme decimal). Canvia els valors, observa i decideix. Compte: n'hi ha prou amb un sol contraexemple per descartar una propietat, però un exemple que funciona no demostra res.</p>
+    <div class="row">
+      <label for="pa">\(a=\)</label><input type="number" id="pa" value="8" min="0.01" step="any" style="width:7em">
+      <label for="pb">\(b=\)</label><input type="number" id="pb" value="2" min="0.01" step="any" style="width:7em">
+    </div>
+    <div class="table-wrap"><table class="prop-table">
+      <thead><tr><th>Igualtat</th><th>Esquerra</th><th>Dreta</th><th></th><th>És sempre certa?</th></tr></thead>
+      <tbody id="propBody"></tbody>
+    </table></div>
+    <div id="propFb"></div>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">Conclusions</span> Escriu a la llibreta</h3>
+    <ol class="prose">
+      <li>Completa: \(\log_a x=y\) vol dir que \(\ldots\)</li>
+      <li>Quant valen sempre \(\log_a 1\) i \(\log_a a\)? Per què no existeix \(\log_a(-4)\)?</li>
+      <li>Quines operacions es «transformen» en passar per un logaritme (el producte en…, el quocient en…, la potència en…)?</li>
+      <li>Un exemple numèric que demostri que \(\log(a+b)\neq\log a+\log b\).</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= EXPLICA ================= -->
+<section class="view" id="v-explica" data-ph="3" hidden>
+  <div class="view-head">
+    <p class="eyebrow">Fase 3 · Explica</p>
+    <h2>Els logaritmes, pas a pas</h2>
+    <p class="lead">Aquí tens formalitzat el que has investigat. Als exemples, prem «Pas següent» i intenta anticipar cada pas abans de veure'l.</p>
+    <div class="chips" aria-label="Apartats">
+      <a class="chip" href="#ex1" data-jump="ex1">1. Definició</a>
+      <a class="chip" href="#ex2" data-jump="ex2">2. Decimals i neperians</a>
+      <a class="chip" href="#ex3" data-jump="ex3">3. Propietats</a>
+      <a class="chip" href="#ex4" data-jump="ex4">4. Canvi de base</a>
+      <a class="chip" href="#ex5" data-jump="ex5">5. Equacions exponencials</a>
+      <a class="chip" href="#ex6" data-jump="ex6">6. Equacions logarítmiques</a>
+      <a class="chip" href="#ex7" data-jump="ex7">7. Aplicacions</a>
+    </div>
+  </div>
+
+  <div class="block" id="ex1">
+    <h3><span class="tag">1</span> Què és un logaritme</h3>
+    <p class="prose">El logaritme en base \(a\) d'un nombre \(x\) és l'exponent al qual cal elevar \(a\) per obtenir \(x\).</p>
+    <div class="key"><div class="mathbox">\[\log_a x=y\;\Longleftrightarrow\; a^y=x\qquad a>0,\ a\neq1,\ x>0\]</div></div>
+    <p class="prose">Exemples: \(\log_2 8=3\) perquè \(2^3=8\); \(\log_3\tfrac19=-2\) perquè \(3^{-2}=\tfrac19\); \(\log_{25}5=\tfrac12\) perquè \(25^{\frac12}=\sqrt{25}=5\).</p>
+    <div class="grid2">
+      <div class="table-wrap"><table>
+        <tbody>
+          <tr><td>\(a\)</td><td>base</td></tr>
+          <tr><td>\(x\)</td><td>argument</td></tr>
+          <tr><td>\(y\)</td><td>logaritme (és un exponent)</td></tr>
+        </tbody></table></div>
+      <div class="prose">
+        <p><b>Conseqüències directes</b></p>
+        <p>\(\log_a 1=0\) perquè \(a^0=1\).</p>
+        <p>\(\log_a a=1\) perquè \(a^1=a\).</p>
+        <p>\(\log_a a^n=n\qquad a^{\log_a x}=x\)</p>
+      </div>
+    </div>
+    <p class="prose"><b>Mètode per calcular-lo sense calculadora:</b> escriu l'argument com a potència de la base.</p>
+    <div class="steps" data-steps>
+      <div class="step">\(\log_2\sqrt[5]{8}\)</div>
+      <div class="step">\(=\log_2\sqrt[5]{2^3}\quad\) (\(8=2^3\))</div>
+      <div class="step">\(=\log_2 2^{\frac35}\quad\) (radical com a potència)</div>
+      <div class="step">\(=\tfrac35\)</div>
+    </div>
+    <div class="note"><b class="t">Per què aquestes condicions?</b>
+      <p>L'argument ha de ser <b>positiu</b>: una potència de base positiva mai no dona 0 ni un nombre negatiu, així que \(\log_2 0\) i \(\log_2(-4)\) no existeixen.</p>
+      <p>La base no pot ser 1, perquè \(1^y=1\) sempre: \(\log_1 5\) no tindria cap valor. I ha de ser positiva per evitar potències com \((-2)^{\frac12}=\sqrt{-2}\), que no són nombres reals.</p></div>
+  </div>
+
+  <div class="block" id="ex2">
+    <h3><span class="tag">2</span> Logaritmes decimals i neperians</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Nom</th><th>Base</th><th>Notació</th><th>Tecla</th></tr></thead>
+      <tbody>
+        <tr><td>Logaritme decimal</td><td>\(10\)</td><td>\(\log x=\log_{10}x\)</td><td><code>log</code></td></tr>
+        <tr><td>Logaritme neperià <span class="curb">Batx</span></td><td>\(e\approx2{,}71828\)</td><td>\(\ln x=\log_e x\)</td><td><code>ln</code></td></tr>
+      </tbody></table></div>
+    <p class="prose">Els logaritmes decimals de les potències de 10 són enters: \(\log1000=3\), \(\log 1=0\), \(\log0{,}01=-2\). Per a la resta de nombres fem servir la calculadora: \(\log 2\approx0{,}3010\), \(\log 3\approx0{,}4771\).</p>
+    <div class="key"><p><b>Una utilitat: comptar xifres.</b> Un nombre natural \(N\) té \(\lfloor\log N\rfloor+1\) xifres, on \(\lfloor\ \rfloor\) indica la part entera. Per exemple, \(\log 2^{64}=64\log2\approx19{,}27\): el nombre \(2^{64}\) té 20 xifres, i ho sabem sense calcular-lo.</p></div>
+    <div class="note"><b class="t"><span class="curb">Batx</span> El nombre \(e\)</b><p>El nombre \(e\) és irracional i apareix en tots els fenòmens de creixement o decreixement continu (poblacions, desintegració radioactiva, interès continu). Per això el logaritme en base \(e\) s'anomena <i>natural</i> o <i>neperià</i>. Exemples: \(\ln e^3=3\), \(\ln\sqrt e=\tfrac12\), \(\ln 1=0\).</p></div>
+  </div>
+
+  <div class="block" id="ex3">
+    <h3><span class="tag">3</span> Propietats dels logaritmes</h3>
+    <p class="prose">Com que un logaritme és un exponent, les propietats de les potències es converteixen en propietats dels logaritmes. Són vàlides en qualsevol base, amb \(p,q>0\).</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Propietat</th><th>Regla</th><th>Exemple</th></tr></thead>
+      <tbody>
+        <tr><td>Producte</td><td>\(\log_a(p\cdot q)=\log_a p+\log_a q\)</td><td>\(\log 20=\log2+\log10\approx1{,}301\)</td></tr>
+        <tr><td>Quocient</td><td>\(\log_a\dfrac pq=\log_a p-\log_a q\)</td><td>\(\log_3\tfrac{54}{2}=\log_3 54-\log_3 2\)</td></tr>
+        <tr><td>Potència</td><td>\(\log_a p^n=n\cdot\log_a p\)</td><td>\(\log 8=\log2^3=3\log2\)</td></tr>
+        <tr><td>Arrel</td><td>\(\log_a\sqrt[n]{p}=\dfrac1n\log_a p\)</td><td>\(\log\sqrt[3]{7}=\tfrac13\log7\)</td></tr>
+      </tbody></table></div>
+    <p class="prose"><b>Exemple 1.</b> Sabent que \(\log A=4\) i \(\log B=7\), calcula \(\log\dfrac{A^2}{\sqrt B}\).</p>
+    <div class="steps" data-steps>
+      <div class="step">\(\log\dfrac{A^2}{\sqrt B}=\log A^2-\log\sqrt B\quad\) (quocient)</div>
+      <div class="step">\(=2\log A-\tfrac12\log B\quad\) (potència i arrel)</div>
+      <div class="step">\(=2\cdot4-\dfrac12\cdot7=8-\dfrac72=\dfrac92\)</div>
+    </div>
+    <p class="prose" style="margin-top:6px"><b>Exemple 2</b> <span class="curb">Batx</span>. Expressa com un sol logaritme \(2\log a+\log b-3\log c\).</p>
+    <div class="steps" data-steps>
+      <div class="step">\(2\log a+\log b-3\log c\)</div>
+      <div class="step">\(=\log a^2+\log b-\log c^3\quad\) (el coeficient passa a exponent)</div>
+      <div class="step">\(=\log\dfrac{a^2\,b}{c^3}\quad\) (suma → producte, resta → quocient)</div>
+    </div>
+    <div class="note"><b class="t">Els errors més freqüents</b>
+      <p>El logaritme <b>no</b> es reparteix sobre la suma: \(\log(2+8)=\log10=1\), però \(\log2+\log8=\log16\approx1{,}204\).</p>
+      <p>Tampoc no és cert que \(\log(p\cdot q)=\log p\cdot\log q\), ni que \(\dfrac{\log p}{\log q}=\log\dfrac pq\), ni que \((\log p)^2=2\log p\).</p></div>
+  </div>
+
+  <div class="block" id="ex4">
+    <h3><span class="tag">4</span> Canvi de base</h3>
+    <p class="prose">La calculadora sol tenir només les tecles <code>log</code> i <code>ln</code>. Per calcular un logaritme en qualsevol altra base fem servir:</p>
+    <div class="key"><div class="mathbox">\[\log_a x=\frac{\log x}{\log a}=\frac{\ln x}{\ln a}\]</div></div>
+    <div class="steps" data-steps>
+      <div class="step">\(\log_3 103\)</div>
+      <div class="step">\(=\dfrac{\log103}{\log3}\)</div>
+      <div class="step">\(\approx\dfrac{2{,}0128}{0{,}4771}\approx4{,}22\)</div>
+    </div>
+    <p class="prose" style="margin-top:6px"><b>D'on surt?</b> Si \(y=\log_a x\), aleshores \(a^y=x\). Prenem logaritmes decimals als dos membres:</p>
+    <div class="mathbox">\[\log a^y=\log x\;\Rightarrow\; y\log a=\log x\;\Rightarrow\; y=\frac{\log x}{\log a}\]</div>
+    <p class="prose">També serveix per calcular valors exactes: \(\log_4 8=\dfrac{\log_2 8}{\log_2 4}=\dfrac32\).</p>
+  </div>
+
+  <div class="block" id="ex5">
+    <h3><span class="tag">5</span> Equacions exponencials</h3>
+    <p class="prose">Són equacions amb la incògnita a l'exponent. Primer aïllem la potència; després triem el mètode.</p>
+    <p class="prose"><b>Mètode 1. Igualar bases</b>, si els dos membres es poden escriure com a potències de la mateixa base.</p>
+    <div class="steps" data-steps>
+      <div class="step">\(2^{x+1}=32\)</div>
+      <div class="step">\(2^{x+1}=2^5\)</div>
+      <div class="step">\(x+1=5\;\Rightarrow\;x=4\)</div>
+    </div>
+    <p class="prose" style="margin-top:6px"><b>Mètode 2. Prendre logaritmes</b> als dos membres, quan no es poden igualar les bases.</p>
+    <div class="steps" data-steps>
+      <div class="step">\(3^x=48\)</div>
+      <div class="step">\(\log3^x=\log48\)</div>
+      <div class="step">\(x\log3=\log48\quad\) (propietat de la potència)</div>
+      <div class="step">\(x=\dfrac{\log48}{\log3}\approx3{,}52\)</div>
+    </div>
+    <p class="prose" style="margin-top:6px"><b>Mètode 3. Canvi de variable</b> <span class="curb">Batx</span>, quan apareixen potències com \(2^x\) i \(4^x=(2^x)^2\).</p>
+    <div class="steps" data-steps>
+      <div class="step">\(4^x-6\cdot2^x+8=0\)</div>
+      <div class="step">\(t=2^x\;\Rightarrow\;t^2-6t+8=0\)</div>
+      <div class="step">\(t=\dfrac{6\pm\sqrt{36-32}}{2}\;\Rightarrow\;t=4\ \text{o}\ t=2\)</div>
+      <div class="step">\(2^x=4\Rightarrow x=2;\qquad 2^x=2\Rightarrow x=1\)</div>
+    </div>
+    <div class="note"><b class="t">Compte</b><p>Abans d'aplicar logaritmes, aïlla la potència: a \(2^{x+1}+4=80\) primer has d'escriure \(2^{x+1}=76\). I recorda que \(\log(2^{x+1}+4)\neq\log2^{x+1}+\log4\).</p></div>
+  </div>
+
+  <div class="block" id="ex6">
+    <h3><span class="tag">6</span> Equacions logarítmiques</h3>
+    <p class="prose">Són equacions amb la incògnita a l'argument d'un logaritme.</p>
+    <div class="key"><p><b>Procediment</b></p>
+      <ol class="prose" style="padding-left:1.2em">
+        <li>Amb les propietats, deixa un sol logaritme a cada membre: \(\log A=\log B\Rightarrow A=B\).</li>
+        <li>Si a un membre hi ha un nombre, escriu-lo com a logaritme (\(1=\log10\), \(2=\log100\)) o aplica la definició: \(\log A=k\Rightarrow A=10^k\).</li>
+        <li>Resol l'equació que en resulta.</li>
+        <li><b>Comprova</b> cada solució a l'equació original: tots els arguments han de ser positius.</li>
+      </ol></div>
+    <div class="steps" data-steps>
+      <div class="step">\(\log x+\log(x-3)=1\)</div>
+      <div class="step">\(\log\left[x(x-3)\right]=\log10\)</div>
+      <div class="step">\(x^2-3x=10\;\Rightarrow\;x^2-3x-10=0\;\Rightarrow\;x=5\ \text{o}\ x=-2\)</div>
+      <div class="step">Comprovació: amb \(x=-2\) apareix \(\log(-2)\), que no existeix. Amb \(x=5\): \(\log5+\log2=\log10=1\ \checkmark\). <b>Solució: \(x=5\).</b></div>
+    </div>
+    <div class="note"><b class="t">Comprovar no és «descartar els negatius»</b><p>Una solució negativa pot ser vàlida. A \(\log x^2=2\), \(x=-10\) és solució perquè \((-10)^2=100>0\). El que s'ha de comprovar és que cap argument quedi negatiu o zero. Per la mateixa raó, si substitueixes \(\log x^2\) per \(2\log x\) pots perdre solucions.</p></div>
+  </div>
+
+  <div class="block" id="ex7">
+    <h3><span class="tag">7</span> Aplicacions dels logaritmes</h3>
+    <p class="prose">Els logaritmes apareixen en dos tipus de situacions: quan cal trobar el temps en un model exponencial, i quan una magnitud varia tant que convé mesurar-la amb una escala logarítmica.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Situació</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td>Interès compost, creixement d'una població</td><td>\(C(t)=C_0\,(1+r)^t\)</td></tr>
+        <tr><td>Depreciació d'un bé</td><td>\(V(t)=V_0\,(1-r)^t\)</td></tr>
+        <tr><td>Creixement o decreixement continu <span class="curb">Batx</span></td><td>\(P(t)=P_0\,e^{kt}\)</td></tr>
+        <tr><td>Escala de Richter</td><td>\(M=\log\dfrac{A}{A_0}\)</td></tr>
+        <tr><td>Acidesa (pH)</td><td>\(\text{pH}=-\log\,[\text{H}^+]\)</td></tr>
+        <tr><td>Nivell sonor (decibels)</td><td>\(L=10\log\dfrac{I}{I_0}\)</td></tr>
+      </tbody></table></div>
+    <div class="note"><b class="t">A tenir en compte</b><p>\(r\) és el tant per u: un 15 % correspon a <span style="white-space:nowrap">\(r=0{,}15\).</span></p><p>A les escales logarítmiques, sumar 1 a la magnitud vol dir multiplicar per 10 la quantitat mesurada.</p></div>
+    <p class="prose"><b>Exemple.</b> Un ordinador costa 1 200 € i perd un 20 % del valor cada any. Quan valdrà menys de 300 €?</p>
+    <div class="steps" data-steps>
+      <div class="step">\(V(t)=1200\cdot0{,}8^t\).&emsp;Volem \(1200\cdot0{,}8^t=300\).</div>
+      <div class="step">Aïllem la potència: \(0{,}8^t=\dfrac{300}{1200}=0{,}25\)</div>
+      <div class="step">Prenem logaritmes: \(t\log0{,}8=\log0{,}25\;\Rightarrow\;t=\dfrac{\log0{,}25}{\log0{,}8}\approx6{,}21\)</div>
+      <div class="step">Interpretem: si el valor es revisa un cop l'any, \(V(6)\approx314{,}57\) € i \(V(7)\approx251{,}66\) €. <b>Valdrà menys de 300 € a partir del 7è any.</b></div>
+    </div>
+    <div class="note"><b class="t">Interpreta sempre el resultat</b><p>Si et pregunten «a partir de quin any» o «quants anys complets», no arrodoneixis a l'enter més proper: mira quan es compleix la condició. Al Repte 1, \(t\approx14{,}21\) significa que cal esperar 15 anys.</p></div>
+  </div>
+</section>
+
+<!-- ================= APLICA ================= -->
+<section class="view" id="v-aplica" data-ph="4" hidden>
+  <div class="view-head">
+    <p class="eyebrow">Fase 4 · Aplica</p>
+    <h2>Practica amb correcció immediata</h2>
+    <p class="lead">Tria el bloc i el nivell. Cada exercici té una pista i, després del primer intent, la solució. El teu progrés es guarda en aquest navegador.</p>
+  </div>
+
+  <div class="block filters">
+    <div class="progress">
+      <div class="row" style="justify-content:space-between"><b id="progTxt">0 de 0 resolts</b><span class="kicker" id="progLv"></span></div>
+      <div class="bar"><i id="progBar"></i></div>
+    </div>
+    <div class="chips" id="fCur" aria-label="Curs"></div>
+    <div class="chips" id="fBlk" aria-label="Bloc"></div>
+    <div class="chips" id="fLvl" aria-label="Nivell"></div>
+  </div>
+
+  <div class="exlist" id="exList"></div>
+  <p class="prose" id="exEmpty" hidden style="color:var(--muted)">No hi ha exercicis amb aquests filtres. Prova un altre nivell o mostra també el contingut de Batxillerat.</p>
+
+  <div class="block">
+    <h3><span class="tag">A la llibreta</span> Més pràctica</h3>
+    <p class="prose">Fes aquests exercicis dels dossiers a la llibreta, pas a pas. Tria'ls segons el que t'hagi costat més a l'autoavaluació.</p>
+    <ul class="prose">
+      <li><b>Exercicis de logaritme:</b> exercicis 1 a 7 (definició, base desconeguda, canvi de base, propietats i equacions).</li>
+      <li><b>Exercicis amb logaritmes. Propietats:</b> exercici 1, com a mínim 20 apartats; exercici 2 (equacions exponencials). Els apartats amb \(\ln\) són de Batxillerat.</li>
+      <li><b>Aplicacions dels logaritmes</b> (material de Clara Morodo): escala de Richter, exemple i exercicis 1 i 2.</li>
+      <li><b>Problemes amb logaritmes:</b> problemes 1 a 3 (depreciació i creixement). Amplia: depreciació industrial i start-up digital fan servir \(e\) <span class="curb">Batx</span>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= AVALUA ================= -->
+<section class="view" id="v-avalua" data-ph="5" hidden>
+  <div class="view-head">
+    <p class="eyebrow">Fase 5 · Avalua</p>
+    <h2>Què has après?</h2>
+    <p class="lead">Respon el qüestionari sense mirar els apunts. Pots fer servir la calculadora només a la pregunta 13. Després fes l'autoavaluació i decideix què has de repassar.</p>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">Part 1</span> Qüestionari</h3>
+    <div id="quiz" style="display:grid;gap:22px"></div>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">Part 2</span> Resposta oberta</h3>
+    <div class="exlist" id="evalOpen"></div>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">Resultat</span></h3>
+    <div class="row" style="gap:18px"><span class="score" id="scoreTxt">0 / 14</span><p id="scoreMsg" class="prose">Respon les preguntes per veure el resultat.</p></div>
+  </div>
+
+  <div class="block">
+    <h3><span class="tag">Part 3</span> Autoavaluació</h3>
+    <p class="prose">Marca com et sents amb cada objectiu: verd, ho domino; groc, encara dubto; vermell, no ho sé fer.</p>
+    <div class="self" id="selfList"></div>
+    <div id="selfAdvice"></div>
+    <label for="exitNote"><b>Bitllet de sortida:</b> en quina situació real faries servir un logaritme? Què t'ha costat més i què faràs per millorar-ho?</label>
+    <textarea id="exitNote" placeholder="Escriu-ho aquí (només es guarda en aquest navegador)."></textarea>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="eas-llicencia"><button type="button" class="eas-autoria" popovertarget="eas-declaracio-ia" aria-haspopup="dialog" title="Mostra la declaració d’ús d’IA">Autoria<span aria-hidden="true">&nbsp;ⓘ</span>:</button> © 2026 by <a href="https://elenaas-math.github.io/">Elena Álvarez Spagnolo</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="Creative Commons" onerror="this.remove()"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="Reconeixement" onerror="this.remove()"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="No comercial" onerror="this.remove()"><img src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt="Sense obra derivada" onerror="this.remove()"></p>
+    <p>Els exercicis sobre l'escala de Richter s'inspiren en el material «Aplicacions dels logaritmes» de Clara Morodo.</p>
+    <div id="eas-declaracio-ia" class="eas-ia" popover role="dialog" aria-labelledby="eas-titol-ia">
+      <p><strong id="eas-titol-ia">Declaració d’ús d’IA:</strong> aquest contingut s’ha elaborat amb el suport d’eines d’intel·ligència artificial generativa: Claude, en tasques de programació, estructuració i part de la redacció. Els continguts de base són d’elaboració pròpia. L’autora n’ha dissenyat la proposta didàctica i n’ha revisat, adaptat i validat tot el contingut, i n’assumeix la plena responsabilitat.</p>
+      <button type="button" class="eas-tanca" popovertarget="eas-declaracio-ia" popovertargetaction="hide">Tanca</button>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Motor de correcció d'expressions amb logaritmes */
+const LOG = (() => {
+  const SUP = { '⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-' };
+  const SUB = { '₀':'0','₁':'1','₂':'2','₃':'3','₄':'4','₅':'5','₆':'6','₇':'7','₈':'8','₉':'9' };
+
+  function tokenize(src) {
+    const s = src.replace(/\s+/g, '').replace(/[−–]/g, '-').replace(/[·×⋅]/g, '*')
+      .replace(/:/g, '/').replace(/sqrt/gi, '√').replace(/cbrt/gi, '∛');
+    const toks = []; let i = 0;
+    while (i < s.length) {
+      const c = s[i];
+      if (/[0-9]/.test(c) || ((c === ',' || c === '.') && /[0-9]/.test(s[i + 1] || ''))) {
+        const rest = s.slice(i);
+        const th = /^\d{1,3}(?:\.\d{3}){2,}(?:,\d+)?(?![\d.])/.exec(rest);
+        let str;
+        if (th) { str = th[0].replace(/\./g, '').replace(',', '.'); i += th[0].length; }
+        else { const m = /^\d*(?:[.,]\d+)?/.exec(rest); str = m[0].replace(',', '.'); i += m[0].length; }
+        const v = parseFloat(str);
+        if (isNaN(v)) throw new Error('Hi ha un número mal escrit.');
+        toks.push({ k: 'num', v }); continue;
+      }
+      if (SUP[c] !== undefined) {
+        let j = i, d = '';
+        while (j < s.length && SUP[s[j]] !== undefined) { d += SUP[s[j]]; j++; }
+        if (s[j] === '√' && /^\d+$/.test(d)) { toks.push({ k: 'root', n: +d }); i = j + 1; continue; }
+        toks.push({ k: 'op', v: '^' });
+        if (d[0] === '-') { toks.push({ k: 'op', v: '-' }); d = d.slice(1); }
+        if (!/^\d+$/.test(d)) throw new Error('Hi ha un exponent mal escrit.');
+        toks.push({ k: 'num', v: +d }); i = j; continue;
+      }
+      if (c === '√') { toks.push({ k: 'root', n: 2 }); i++; continue; }
+      if (c === '∛') { toks.push({ k: 'root', n: 3 }); i++; continue; }
+      if (c === '∜') { toks.push({ k: 'root', n: 4 }); i++; continue; }
+      const low = s.slice(i, i + 5).toLowerCase();
+      if (low.startsWith('arrel')) { toks.push({ k: 'fn' }); i += 5; continue; }
+      if (low.startsWith('log')) {
+        i += 3;
+        if (SUB[s[i]] !== undefined) {
+          let d = ''; while (i < s.length && SUB[s[i]] !== undefined) { d += SUB[s[i]]; i++; }
+          toks.push({ k: 'log', base: +d }); continue;
+        }
+        if (s[i] === '_') { i++; toks.push({ k: 'logu' }); continue; }
+        toks.push({ k: 'log' }); continue;
+      }
+      if (low.startsWith('ln')) { toks.push({ k: 'ln' }); i += 2; continue; }
+      if (c === 'e' || c === 'E') { toks.push({ k: 'e' }); i++; continue; }
+      if (c === 'π') { toks.push({ k: 'pi' }); i++; continue; }
+      if (/[a-zA-Z]/.test(c)) { toks.push({ k: 'var', v: c.toLowerCase() }); i++; continue; }
+      if ('+-*/^()'.includes(c)) { toks.push({ k: 'op', v: c }); i++; continue; }
+      if (c === ';') { toks.push({ k: 'op', v: ',' }); i++; continue; }
+      if (c === ',') throw new Error('La coma és per als decimals. Per separar, fes servir «;».');
+      if (c === '=') throw new Error('No cal escriure el signe «=»: escriu només el resultat.');
+      throw new Error('No reconec el caràcter «' + c + '».');
+    }
+    return toks;
+  }
+
+  function parse(str) {
+    if (!str || !str.trim()) throw new Error('Escriu una resposta.');
+    const t = tokenize(str); let p = 0;
+    const isOp = v => t[p] && t[p].k === 'op' && t[p].v === v;
+    const expect = v => {
+      if (!isOp(v)) throw new Error(v === ')' ? 'Falta tancar un parèntesi.' : (v === '(' ? 'Falta obrir un parèntesi.' : 'Falta «' + (v === ',' ? ';' : v) + '».'));
+      p++;
+    };
+    const ATOMS = ['num', 'var', 'root', 'fn', 'log', 'logu', 'ln', 'e', 'pi'];
+    const startsAtom = () => { const k = t[p]; return k && (ATOMS.includes(k.k) || (k.k === 'op' && k.v === '(')); };
+    function expr() {
+      let a = term();
+      while (isOp('+') || isOp('-')) { const o = t[p++].v; const b = term(); a = { t: o === '+' ? 'add' : 'sub', a, b }; }
+      return a;
+    }
+    function term() {
+      let a = unary();
+      for (;;) {
+        if (isOp('*')) { p++; a = { t: 'mul', a, b: unary() }; }
+        else if (isOp('/')) { p++; a = { t: 'div', a, b: unary() }; }
+        else if (startsAtom()) { a = { t: 'mul', a, b: power(), imp: true }; }
+        else break;
+      }
+      return a;
+    }
+    function unary() {
+      if (isOp('-')) { p++; return { t: 'neg', a: unary() }; }
+      if (isOp('+')) { p++; return unary(); }
+      return power();
+    }
+    function power() {
+      let a = atom();
+      if (isOp('^')) { p++; a = { t: 'pow', a, b: unary() }; }
+      return a;
+    }
+    function simple(k) {
+      p++;
+      if (k.k === 'num') return { t: 'num', v: k.v };
+      if (k.k === 'var') return { t: 'var', n: k.v };
+      if (k.k === 'e') return { t: 'e' };
+      return { t: 'pi' };
+    }
+    function atom() {
+      const k = t[p];
+      if (!k) throw new Error('L\'expressió està incompleta.');
+      if (k.k === 'num' || k.k === 'var' || k.k === 'e' || k.k === 'pi') return simple(k);
+      if (k.k === 'op' && k.v === '(') { p++; const e = expr(); expect(')'); return { t: 'par', a: e }; }
+      if (k.k === 'root') { p++; return { t: 'root', n: { t: 'num', v: k.n }, x: radicand() }; }
+      if (k.k === 'fn') { p++; expect('('); const n = expr(); expect(','); const x = expr(); expect(')'); return { t: 'root', n, x }; }
+      if (k.k === 'log') { p++; const b = k.base !== undefined ? { t: 'num', v: k.base } : null; return { t: 'log', b, x: farg() }; }
+      if (k.k === 'logu') { p++; const b = baseArg(); return { t: 'log', b, x: farg() }; }
+      if (k.k === 'ln') { p++; return { t: 'ln', x: farg() }; }
+      throw new Error('Hi ha un signe «' + (k.v === ',' ? ';' : k.v) + '» fora de lloc.');
+    }
+    function baseArg() {
+      const k = t[p];
+      if (!k) throw new Error('Falta la base del logaritme.');
+      if (isOp('(')) { p++; const e = expr(); expect(')'); return e; }
+      if (k.k === 'num' || k.k === 'var' || k.k === 'e') return simple(k);
+      throw new Error('Després de log_ ha d\'anar la base. Exemple: log_2(8).');
+    }
+    function farg() {
+      if (!t[p]) throw new Error('Falta l\'argument del logaritme.');
+      if (isOp('(')) { p++; const e = expr(); expect(')'); return { t: 'par', a: e }; }
+      if (startsAtom()) { let a = atom(); if (isOp('^')) { p++; a = { t: 'pow', a, b: unary() }; } return a; }
+      throw new Error('Després de log o ln ha d\'anar l\'argument.');
+    }
+    function radicand() {
+      const k = t[p];
+      if (!k) throw new Error('Falta el radicand després de l\'arrel.');
+      if (isOp('(')) { p++; const e = expr(); expect(')'); return e; }
+      if (startsAtom()) return atom();
+      throw new Error('Després del signe d\'arrel ha d\'anar el radicand.');
+    }
+    const r = expr();
+    if (p < t.length) {
+      const k = t[p];
+      throw new Error(k.k === 'op' && k.v === ')' ? 'Sobra un parèntesi de tancament.' : 'Sobra alguna cosa al final de l\'expressió.');
+    }
+    return r;
+  }
+
+  function ev(n, env) {
+    switch (n.t) {
+      case 'num': return n.v;
+      case 'var': return env[n.n] !== undefined ? env[n.n] : NaN;
+      case 'e': return Math.E;
+      case 'pi': return Math.PI;
+      case 'par': return ev(n.a, env);
+      case 'neg': return -ev(n.a, env);
+      case 'add': return ev(n.a, env) + ev(n.b, env);
+      case 'sub': return ev(n.a, env) - ev(n.b, env);
+      case 'mul': return ev(n.a, env) * ev(n.b, env);
+      case 'div': return ev(n.a, env) / ev(n.b, env);
+      case 'pow': {
+        const b = ev(n.a, env), e = ev(n.b, env);
+        if (b < 0 && !Number.isInteger(e)) return NaN;
+        return Math.pow(b, e);
+      }
+      case 'root': {
+        const k = ev(n.n, env), x = ev(n.x, env);
+        if (!Number.isInteger(k) || k < 2) return NaN;
+        if (x < 0) return k % 2 === 1 ? -Math.pow(-x, 1 / k) : NaN;
+        return Math.pow(x, 1 / k);
+      }
+      case 'log': {
+        const x = ev(n.x, env), b = n.b ? ev(n.b, env) : 10;
+        if (!(x > 0) || !(b > 0) || b === 1) return NaN;
+        return Math.log(x) / Math.log(b);
+      }
+      case 'ln': { const x = ev(n.x, env); return x > 0 ? Math.log(x) : NaN; }
+    }
+    return NaN;
+  }
+
+  function fmt(v) { return String(v).replace('.', '{,}'); }
+  const strip = n => (n && n.t === 'par' ? n.a : n);
+  function texArg(x) {
+    if (x.t === 'par') return '\\left(' + tex(x.a) + '\\right)';
+    return tex(x);
+  }
+  function tex(n) {
+    switch (n.t) {
+      case 'num': return fmt(n.v);
+      case 'var': return n.n;
+      case 'e': return 'e';
+      case 'pi': return '\\pi';
+      case 'par': return '\\left(' + tex(n.a) + '\\right)';
+      case 'neg': return '-' + (n.a.t === 'add' || n.a.t === 'sub' ? '\\left(' + tex(n.a) + '\\right)' : tex(n.a));
+      case 'add': return tex(n.a) + '+' + tex(n.b);
+      case 'sub': return tex(n.a) + '-' + tex(n.b);
+      case 'mul': {
+        const bStartsNum = n.b.t === 'num' || (n.b.t === 'pow' && n.b.a.t === 'num');
+        let sep = '';
+        if (!n.imp || bStartsNum) sep = '\\cdot ';
+        else if (['root', 'log', 'ln'].includes(n.b.t)) sep = '\\,';
+        return tex(n.a) + sep + tex(n.b);
+      }
+      case 'div': return '\\dfrac{' + tex(strip(n.a)) + '}{' + tex(strip(n.b)) + '}';
+      case 'pow': {
+        const a = n.a;
+        const simpleBase = ['num', 'var', 'par', 'e', 'pi'].includes(a.t);
+        const base = simpleBase ? tex(a) : '\\left(' + tex(a) + '\\right)';
+        return base + '^{' + tex(strip(n.b)) + '}';
+      }
+      case 'root': {
+        const k = n.n.t === 'num' && n.n.v === 2 ? '' : '[' + tex(n.n) + ']';
+        return '\\sqrt' + k + '{' + tex(n.x) + '}';
+      }
+      case 'log': return (n.b ? '\\log_{' + tex(strip(n.b)) + '}' : '\\log') + ' ' + texArg(n.x);
+      case 'ln': return '\\ln ' + texArg(n.x);
+    }
+    return '';
+  }
+
+  /* --- anàlisi de forma --- */
+  const KIDS = ['a', 'b', 'x', 'n'];
+  function walk(n, f) {
+    if (!n || typeof n !== 'object') return;
+    f(n);
+    KIDS.forEach(k => { if (n[k] && typeof n[k] === 'object') walk(n[k], f); });
+  }
+  const collectLogs = n => { const r = []; walk(n, m => { if (m.t === 'log' || m.t === 'ln') r.push(m); }); return r; };
+  const hasVars = n => { let v = false; walk(n, m => { if (m.t === 'var') v = true; }); return v; };
+
+  const ENVS = [0, 1, 2].map(s => {
+    const e = {}; 'abcdfghijklmnopqrstuvwxyz'.split('').forEach((ch, i) => { e[ch] = 1.17 + ((i * 7 + s * 13) % 23) / 9.1; });
+    return e;
+  });
+
+  const MSG = {
+    approx: 'Molt a prop, però és una aproximació decimal. Dona el valor exacte (enter, fracció o arrel).',
+    calc: 'El valor és correcte, però has de calcular el logaritme, no deixar-lo indicat.',
+    round: 'Gairebé: revisa l\'arrodoniment (i no arrodoneixis els càlculs intermedis).',
+    wrong: 'El resultat no és correcte. Revisa els càlculs pas a pas.',
+    real: 'Aquesta expressió no té un valor real. Revisa els signes i els parèntesis.'
+  };
+
+  function tolOf(ex, b) {
+    if (ex.tol !== undefined) return ex.tol;
+    if (ex.rel !== undefined) return ex.rel * Math.abs(b);
+    return 1e-9 * Math.max(1, Math.abs(b));
+  }
+  const same = (a, b, ex) => Math.abs(a - b) <= tolOf(ex, b) + 1e-12;
+
+  function cleanUnits(s) {
+    return s.replace(/^\s*[≈~]\s*/, '')
+      .replace(/\s*(anys?|mesos?|dies|db|mol\s*\/\s*l|unitats|vegades|doblecs?|habitants|usuaris|euros?|€|%)\s*\.?\s*$/i, '');
+  }
+
+  function nearMsg(ex, a) {
+    if (!ex.near) return null;
+    const m = ex.near.find(nr => Math.abs(a - nr.v) <= nr.tol);
+    return m ? m.msg : null;
+  }
+
+  function check(ex, input) {
+    if (ex.type === 'sols') return checkSols(ex, input);
+    const type = ex.type;
+    const src = type === 'approx' ? cleanUnits(input) : input;
+    let ast;
+    try { ast = parse(src); } catch (e) { return { ok: false, kind: 'syntax', msg: e.message }; }
+    const numeric = !['onelog', 'expand', 'nolog'].includes(type);
+    if (numeric && hasVars(ast)) return { ok: false, kind: 'syntax', msg: 'La resposta ha de ser un nombre: no hi pot haver lletres (només la constant e).' };
+    const eAst = parse(ex.ans);
+    const logs = collectLogs(ast);
+    const form = m => ({ ok: false, kind: 'form', msg: m });
+    for (const env of (numeric ? [{}] : ENVS)) {
+      const a = ev(ast, env), b = ev(eAst, env);
+      if (!isFinite(a)) return { ok: false, kind: 'value', msg: MSG.real };
+      if (numeric) {
+        if (!same(a, b, ex)) {
+          const nm = nearMsg(ex, a); if (nm) return form(nm);
+          if (type === 'approx' && Math.abs(a - b) <= 10 * tolOf(ex, b) + 1e-12) return form(MSG.round);
+          if (type !== 'approx' && Math.abs(a - b) < 2e-3 * Math.max(1, Math.abs(b))) return form(type === 'inlog' ? 'Molt a prop, però és una aproximació decimal. Expressa-ho de manera exacta, amb logaritmes.' : MSG.approx);
+          return { ok: false, kind: 'value', msg: MSG.wrong };
+        }
+      } else if (Math.abs(a - b) > 1e-7 * Math.max(1, Math.abs(b))) {
+        return { ok: false, kind: 'value', msg: MSG.wrong };
+      }
+    }
+    if (type === 'exact' && logs.length) return form(MSG.calc);
+    if (type === 'nolog' && logs.length) return form('El valor és correcte, però \\(x\\) no pot quedar expressat amb logaritmes: iguala els arguments.');
+    if (type === 'inlog') {
+      for (const lg of logs) {
+        if (lg.t === 'ln' || (lg.b && Math.abs(ev(lg.b, {}) - 10) > 1e-12)) return form('El valor és correcte, però has de fer servir logaritmes decimals.');
+        const v = ev(lg.x, {});
+        if (!ex.allow.some(w => Math.abs(w - v) < 1e-9)) return form(ex.amsg || 'El valor és correcte, però només hi poden aparèixer els logaritmes de l\'enunciat.');
+      }
+    }
+    if (type === 'onelog') {
+      const top = strip(ast);
+      if (!(top.t === 'log' || top.t === 'ln') || logs.length !== 1) return form('El valor és correcte, però ha de quedar un sol logaritme, sense coeficient davant.');
+    }
+    if (type === 'expand') {
+      if (!logs.length) return form('Has d\'escriure el resultat amb logaritmes.');
+      if (logs.some(lg => strip(lg.x).t !== 'var')) return form('El valor és correcte, però encara pots desenvolupar més: cada logaritme ha de tenir només una lletra com a argument.');
+    }
+    return { ok: true };
+  }
+
+  function splitSols(input) {
+    let s = input.trim().toLowerCase();
+    if (/^(cap|∅|no\s*t[ée]|sense\s*soluci|no\s*hi\s*ha)/.test(s)) return [];
+    s = s.replace(/x\s*[₁₂12]?\s*=/g, '').replace(/\s+[io]\s+/g, ';');
+    // separa per «;» només fora de parèntesis (arrel(8;2) és una sola solució)
+    const out = []; let depth = 0, cur = '';
+    for (const ch of s) {
+      if (ch === '(') depth++;
+      if (ch === ')') depth--;
+      if (ch === ';' && depth <= 0) { out.push(cur); cur = ''; } else cur += ch;
+    }
+    out.push(cur);
+    const res = [];
+    out.map(x => x.trim()).filter(Boolean).forEach(x => {
+      if (/^±/.test(x)) { res.push(x.slice(1)); res.push('-(' + x.slice(1) + ')'); } else res.push(x);
+    });
+    return res;
+  }
+
+  function checkSols(ex, input) {
+    if (!input || !input.trim()) return { ok: false, kind: 'syntax', msg: 'Escriu una resposta.' };
+    const parts = splitSols(input);
+    const vals = [], asts = [];
+    for (const pt of parts) {
+      let a;
+      try { a = parse(pt); } catch (e) { return { ok: false, kind: 'syntax', msg: e.message }; }
+      if (hasVars(a)) return { ok: false, kind: 'syntax', msg: 'Escriu només el valor de \\(x\\). Si n\'hi ha més d\'un, separa\'ls amb «;». Si no n\'hi ha cap, escriu «cap».' };
+      const v = ev(a, {});
+      if (!isFinite(v)) return { ok: false, kind: 'value', msg: MSG.real };
+      vals.push(v); asts.push(a);
+    }
+    const exp = ex.sols.map(s => ev(parse(s), {}));
+    const rej = (ex.reject || []).map(s => ev(parse(s), {}));
+    if (vals.some(v => rej.some(r => Math.abs(v - r) < 1e-6))) {
+      return { ok: false, kind: 'value', msg: ex.rmsg || 'Has inclòs una solució que no és vàlida: substitueix-la a l\'equació original i comprova que tots els arguments dels logaritmes siguin positius.' };
+    }
+    const extra = vals.filter(v => !exp.some(e => same(v, e, ex)));
+    const missing = exp.filter(e => !vals.some(v => same(v, e, ex)));
+    if (extra.length) {
+      if (ex.tol === undefined && extra.every(v => exp.some(e => Math.abs(v - e) < 2e-3 * Math.max(1, Math.abs(e))))) return { ok: false, kind: 'form', msg: MSG.approx };
+      if (ex.tol !== undefined && extra.every(v => exp.some(e => Math.abs(v - e) <= 10 * ex.tol))) return { ok: false, kind: 'form', msg: MSG.round };
+      return { ok: false, kind: 'value', msg: exp.length ? (vals.length > 1 ? 'Alguna de les solucions no és correcta. Revisa els càlculs.' : MSG.wrong) : 'Revisa-ho: aquesta equació no té cap solució vàlida.' };
+    }
+    if (missing.length) return { ok: false, kind: 'form', msg: vals.length ? 'El que has escrit és correcte, però falta alguna solució.' : 'L\'equació sí que té solució. Revisa els càlculs.' };
+    if (ex.tol === undefined && asts.some(a => collectLogs(a).length)) return { ok: false, kind: 'form', msg: 'El valor és correcte, però has de calcular el logaritme: la solució és un nombre exacte.' };
+    return { ok: true };
+  }
+
+  function preview(type, input) {
+    if (type === 'sols') {
+      const parts = splitSols(input);
+      if (!parts.length) return '\\text{cap solució}';
+      return parts.map(pt => 'x=' + tex(parse(pt))).join(';\\quad ');
+    }
+    return tex(parse(type === 'approx' ? cleanUnits(input) : input));
+  }
+
+  return { parse, check, preview, ev, tex, collectLogs };
+})();
+if (typeof module !== 'undefined') module.exports = LOG;
+</script>
+
+<script>
+/* Banc d'exercicis. q, sol, hint: TeX. ans/sols: sintaxi del motor. cur:'b' = Batxillerat */
+const R = String.raw;
+const BLOCKS = {
+  A: 'Definició de logaritme',
+  B: 'Base o argument desconeguts',
+  C: 'Propietats',
+  D: 'Canvi de base i calculadora',
+  E: 'Equacions exponencials',
+  F: 'Equacions logarítmiques',
+  G: 'Problemes amb context'
+};
+const TOL = 0.006;
+const I_DEF = 'Calcula aplicant la definició (sense calculadora).';
+const I_X = R`Troba el valor de \(x\).`;
+const I_PROP = 'Calcula aplicant les propietats (sense calculadora).';
+const I_AB = R`Sabent que \(\log A=4\) i \(\log B=7\), calcula:`;
+const I_L2 = R`Expressa en funció de \(\log 2\) (sense calculadora).`;
+const I_L23 = R`Expressa en funció de \(\log 2\) i \(\log 3\).`;
+const I_CB = 'Calcula amb la calculadora fent servir el canvi de base. Arrodoneix a les centèsimes.';
+const I_EQ = 'Resol l\'equació.';
+const I_EQA = 'Resol l\'equació. Dona el resultat exacte o arrodonit a les centèsimes.';
+const I_LEQ = 'Resol l\'equació i comprova les solucions.';
+const BASE_POS = R`La base d'un logaritme ha de ser positiva: aquesta solució no és vàlida.`;
+
+const EX = [
+  // A · Definició
+  { id:'A1', lvl:1, blk:'A', ins:I_DEF, type:'exact', q:R`\log_4 16`, ans:'2',
+    hint:'Quin exponent cal posar a 4 per obtenir 16?', sol:R`\log_4 16=2\ \text{ perquè }\ 4^2=16` },
+  { id:'A2', lvl:1, blk:'A', ins:I_DEF, type:'exact', q:R`\log_5 625`, ans:'4',
+    hint:R`\(625=5^{\,?}\)`, sol:R`\log_5 625=4\ \text{ perquè }\ 5^4=625` },
+  { id:'A3', lvl:1, blk:'A', ins:I_DEF, type:'exact', q:R`\log_2 \tfrac{1}{2}`, ans:'-1',
+    hint:R`Recorda que \(a^{-1}=\tfrac{1}{a}\).`, sol:R`\log_2\tfrac12=-1\ \text{ perquè }\ 2^{-1}=\tfrac12` },
+  { id:'A4', lvl:1, blk:'A', ins:I_DEF, type:'exact', q:R`\log_4 1`, ans:'0',
+    hint:'Qualsevol nombre diferent de 0 elevat a 0 dona 1.', sol:R`\log_4 1=0\ \text{ perquè }\ 4^0=1` },
+  { id:'A5', lvl:1, blk:'A', ins:I_DEF, type:'exact', q:R`\log 1000`, ans:'3',
+    hint:'Si no s\'escriu la base, la base és 10.', sol:R`\log1000=3\ \text{ perquè }\ 10^3=1000` },
+  { id:'A6', lvl:1, blk:'A', ins:I_DEF, type:'exact', q:R`\log 0{,}01`, ans:'-2',
+    hint:R`\(0{,}01=\tfrac{1}{100}=10^{\,?}\)`, sol:R`0{,}01=10^{-2}\;\Rightarrow\;\log0{,}01=-2` },
+  { id:'A7', lvl:2, blk:'A', ins:I_DEF, type:'exact', q:R`\log_4 \tfrac{1}{64}`, ans:'-3',
+    hint:R`\(64=4^3\).`, sol:R`\tfrac{1}{64}=\tfrac{1}{4^3}=4^{-3}\;\Rightarrow\;\log_4\tfrac1{64}=-3` },
+  { id:'A8', lvl:2, blk:'A', ins:I_DEF, type:'exact', q:R`\log_5 \sqrt[3]{25}`, ans:'2/3',
+    hint:R`Escriu l'arrel com a potència de 5: \(\sqrt[n]{a^m}=a^{\frac mn}\).`, sol:R`\sqrt[3]{25}=\sqrt[3]{5^2}=5^{\frac23}\;\Rightarrow\;\log_5\sqrt[3]{25}=\tfrac23` },
+  { id:'A9', lvl:2, blk:'A', ins:I_DEF, type:'exact', q:R`\log_{\frac13} 81`, ans:'-4',
+    hint:R`\(\left(\tfrac13\right)^{-1}=3\).`, sol:R`\left(\tfrac13\right)^{-4}=3^4=81\;\Rightarrow\;\log_{\frac13}81=-4` },
+  { id:'A10', lvl:2, blk:'A', ins:I_DEF, type:'exact', q:R`\log \dfrac{1}{\sqrt{10}}`, ans:'-1/2',
+    hint:R`\(\sqrt{10}=10^{\frac12}\).`, sol:R`\dfrac{1}{\sqrt{10}}=10^{-\frac12}\;\Rightarrow\;\log\dfrac1{\sqrt{10}}=-\tfrac12` },
+  { id:'A11', lvl:2, blk:'A', ins:I_DEF, type:'exact', q:R`\log_3 \sqrt[4]{27}`, ans:'3/4',
+    hint:R`\(27=3^3\).`, sol:R`\sqrt[4]{27}=\sqrt[4]{3^3}=3^{\frac34}\;\Rightarrow\;\log_3\sqrt[4]{27}=\tfrac34` },
+  { id:'A12', lvl:2, blk:'A', ins:I_DEF, type:'exact', q:R`\log_8 2`, ans:'1/3',
+    hint:'Quina arrel de 8 dona 2?', sol:R`8^{\frac13}=\sqrt[3]{8}=2\;\Rightarrow\;\log_8 2=\tfrac13` },
+  { id:'A13', lvl:3, blk:'A', ins:I_DEF, type:'exact', q:R`\log_3 \dfrac{\sqrt{243}}{3}`, ans:'3/2',
+    hint:R`\(243=3^5\).`, sol:R`\dfrac{\sqrt{3^5}}{3}=\dfrac{3^{\frac52}}{3}=3^{\frac52-1}=3^{\frac32}\;\Rightarrow\;\tfrac32` },
+  { id:'A14', lvl:3, blk:'A', ins:I_DEF, type:'exact', q:R`\log_2 \sqrt[3]{32}`, ans:'5/3',
+    hint:R`\(32=2^5\).`, sol:R`\sqrt[3]{2^5}=2^{\frac53}\;\Rightarrow\;\log_2\sqrt[3]{32}=\tfrac53` },
+  { id:'A15', lvl:3, blk:'A', ins:I_DEF, type:'exact', q:R`\log_3 \dfrac{1}{27\sqrt[3]{9}}`, ans:'-11/3',
+    hint:R`\(27=3^3\) i \(\sqrt[3]{9}=3^{\frac23}\).`, sol:R`27\sqrt[3]{9}=3^3\cdot3^{\frac23}=3^{\frac{11}{3}}\;\Rightarrow\;\log_3\dfrac{1}{3^{\frac{11}{3}}}=-\tfrac{11}{3}` },
+  { id:'A16', lvl:3, blk:'A', ins:I_DEF, type:'exact', q:R`\log_{\frac15} 125`, ans:'-3',
+    hint:R`\(\left(\tfrac15\right)^{-1}=5\).`, sol:R`\left(\tfrac15\right)^{-3}=5^3=125\;\Rightarrow\;\log_{\frac15}125=-3` },
+  { id:'A17', lvl:3, blk:'A', ins:I_DEF, type:'exact', q:R`\log_3 \dfrac{1}{3\sqrt[4]{27}}`, ans:'-7/4',
+    hint:R`\(3\sqrt[4]{27}=3^1\cdot3^{\frac34}\).`, sol:R`3\sqrt[4]{27}=3^{1+\frac34}=3^{\frac74}\;\Rightarrow\;\log_3\dfrac{1}{3^{\frac74}}=-\tfrac74` },
+  { id:'A18', lvl:1, blk:'A', cur:'b', ins:I_DEF, type:'exact', q:R`\ln e^2`, ans:'2',
+    hint:R`\(\ln\) és el logaritme en base \(e\).`, sol:R`\ln e^2=2\ \text{ perquè }\ e^2=e^2` },
+  { id:'A19', lvl:2, blk:'A', cur:'b', ins:I_DEF, type:'exact', q:R`\ln \sqrt[3]{e}`, ans:'1/3',
+    hint:R`\(\sqrt[3]{e}=e^{\frac13}\).`, sol:R`\ln e^{\frac13}=\tfrac13` },
+  { id:'A20', lvl:2, blk:'A', cur:'b', ins:I_DEF, type:'exact', q:R`\ln \dfrac{\sqrt{e}}{e}`, ans:'-1/2',
+    hint:R`Escriu-ho tot com una potència de \(e\).`, sol:R`\dfrac{e^{\frac12}}{e}=e^{-\frac12}\;\Rightarrow\;-\tfrac12` },
+  { id:'A21', lvl:3, blk:'A', cur:'b', ins:I_DEF, type:'exact', q:R`\ln \dfrac{e}{\sqrt[4]{e}}`, ans:'3/4',
+    hint:R`\(\dfrac{e^m}{e^n}=e^{m-n}\).`, sol:R`\dfrac{e}{e^{\frac14}}=e^{\frac34}\;\Rightarrow\;\tfrac34` },
+  { id:'A22', lvl:3, blk:'A', cur:'b', ins:I_DEF, type:'exact', q:R`\ln \dfrac{1}{\sqrt[3]{e^2}}`, ans:'-2/3',
+    hint:R`\(\sqrt[3]{e^2}=e^{\frac23}\).`, sol:R`\dfrac1{e^{\frac23}}=e^{-\frac23}\;\Rightarrow\;-\tfrac23` },
+
+  // B · Base o argument desconeguts
+  { id:'B1', lvl:1, blk:'B', ins:I_X, type:'sols', q:R`\log_x 25=2`, sols:['5'], reject:['-5'], rmsg:BASE_POS,
+    hint:R`Passa a forma exponencial: \(x^2=25\).`, sol:R`x^2=25\;\Rightarrow\;x=5\quad(x=-5\ \text{no pot ser base})` },
+  { id:'B2', lvl:1, blk:'B', ins:I_X, type:'sols', q:R`\log_3 \tfrac{1}{3}=x`, sols:['-1'],
+    hint:R`\(3^x=\tfrac13\).`, sol:R`3^x=\tfrac13=3^{-1}\;\Rightarrow\;x=-1` },
+  { id:'B3', lvl:1, blk:'B', ins:I_X, type:'sols', q:R`\log_x 121=2`, sols:['11'], reject:['-11'], rmsg:BASE_POS,
+    hint:R`\(x^2=121\).`, sol:R`x^2=121\;\Rightarrow\;x=11` },
+  { id:'B4', lvl:1, blk:'B', ins:I_X, type:'sols', q:R`\log_x 3=1`, sols:['3'],
+    hint:R`\(x^1=3\).`, sol:R`x^1=3\;\Rightarrow\;x=3` },
+  { id:'B5', lvl:1, blk:'B', ins:I_X, type:'sols', q:R`\log_2 x=5`, sols:['32'],
+    hint:R`\(x=2^5\).`, sol:R`x=2^5=32` },
+  { id:'B6', lvl:2, blk:'B', ins:I_X, type:'sols', q:R`\log_4 x=\tfrac{3}{2}`, sols:['8'],
+    hint:R`\(x=4^{\frac32}=\left(\sqrt4\right)^3\).`, sol:R`x=4^{\frac32}=\left(\sqrt4\right)^3=2^3=8` },
+  { id:'B7', lvl:2, blk:'B', ins:I_X, type:'sols', q:R`\log_{25} 5=x`, sols:['1/2'],
+    hint:R`\(25^x=5\). Quina relació hi ha entre 25 i 5?`, sol:R`25^x=5\;\Rightarrow\;x=\tfrac12\ \ \left(\sqrt{25}=5\right)` },
+  { id:'B8', lvl:2, blk:'B', ins:I_X, type:'sols', q:R`\log_x 3=2`, sols:['√3'], reject:['-√3'], rmsg:BASE_POS,
+    hint:R`\(x^2=3\).`, sol:R`x^2=3\;\Rightarrow\;x=\sqrt3` },
+  { id:'B9', lvl:2, blk:'B', ins:I_X, type:'sols', q:R`\log_x \sqrt{2}=4`, sols:['2^(1/8)'],
+    hint:R`\(x^4=\sqrt2=2^{\frac12}\). Pots escriure 2^(1/8) o arrel(8;2).`, sol:R`x^4=2^{\frac12}\;\Rightarrow\;x=2^{\frac18}=\sqrt[8]{2}` },
+  { id:'B10', lvl:3, blk:'B', ins:I_X, type:'sols', q:R`\log_x \sqrt{3}=\tfrac{1}{2}`, sols:['3'],
+    hint:R`\(x^{\frac12}=\sqrt{x}\).`, sol:R`x^{\frac12}=\sqrt3\;\Rightarrow\;\sqrt x=\sqrt3\;\Rightarrow\;x=3` },
+  { id:'B11', lvl:3, blk:'B', ins:I_X, type:'sols', q:R`\log_x 2x=2`, sols:['2'], reject:['0'], rmsg:R`\(x=0\) no pot ser la base d'un logaritme.`,
+    hint:R`\(x^2=2x\). Resol l'equació de segon grau i comprova quines solucions poden ser base.`, sol:R`x^2=2x\;\Rightarrow\;x(x-2)=0\;\Rightarrow\;x=2\quad(x=0\ \text{no és vàlida})` },
+  { id:'B12', lvl:3, blk:'B', ins:I_X, type:'sols', q:R`\log_x \sqrt{2}=3`, sols:['2^(1/6)'],
+    hint:R`\(x^3=2^{\frac12}\).`, sol:R`x^3=2^{\frac12}\;\Rightarrow\;x=2^{\frac16}=\sqrt[6]{2}` },
+  { id:'B13', lvl:3, blk:'B', ins:I_X, type:'sols', q:R`\log_{\frac12} x=-3`, sols:['8'],
+    hint:R`\(x=\left(\tfrac12\right)^{-3}\).`, sol:R`x=\left(\tfrac12\right)^{-3}=2^3=8` },
+
+  // C · Propietats
+  { id:'C1', lvl:1, blk:'C', ins:I_PROP, type:'exact', q:R`\log_2 8+\log_2 4`, ans:'5',
+    hint:R`Pots calcular cada logaritme o fer servir \(\log_a p+\log_a q=\log_a(p\cdot q)\).`, sol:R`3+2=5\quad\left(=\log_2 32\right)` },
+  { id:'C2', lvl:1, blk:'C', ins:I_PROP, type:'exact', q:R`\log 4+\log 25`, ans:'2',
+    hint:'Cap dels dos té un valor exacte senzill, però el producte sí.', sol:R`\log(4\cdot25)=\log100=2` },
+  { id:'C3', lvl:1, blk:'C', ins:I_PROP, type:'exact', q:R`\log_3 54-\log_3 2`, ans:'3',
+    hint:R`\(\log_a p-\log_a q=\log_a\frac pq\).`, sol:R`\log_3\tfrac{54}{2}=\log_3 27=3` },
+  { id:'C4', lvl:1, blk:'C', ins:I_AB, type:'exact', q:R`\log\left(A\,B^2\right)`, ans:'18',
+    hint:R`\(\log(A\cdot B^2)=\log A+2\log B\).`, sol:R`\log A+2\log B=4+2\cdot7=18` },
+  { id:'C5', lvl:1, blk:'C', ins:I_AB, type:'exact', q:R`\log(100A)`, ans:'6',
+    hint:R`\(\log100=2\).`, sol:R`\log100+\log A=2+4=6` },
+  { id:'C6', lvl:2, blk:'C', ins:I_AB, type:'exact', q:R`\log\dfrac{10}{AB}`, ans:'-10',
+    hint:R`\(\log\dfrac{10}{AB}=\log10-\log A-\log B\).`, sol:R`1-4-7=-10` },
+  { id:'C7', lvl:2, blk:'C', ins:I_AB, type:'exact', q:R`\log\sqrt{\dfrac{A^3B}{100}}`, ans:'17/2',
+    hint:R`L'arrel quadrada és la potència \(\frac12\): tot queda multiplicat per \(\frac12\).`, sol:R`\tfrac12\left(3\log A+\log B-\log100\right)=\tfrac12(12+7-2)=\tfrac{17}{2}` },
+  { id:'C8', lvl:3, blk:'C', ins:I_AB, type:'exact', q:R`\log\dfrac{\sqrt{A}\,B}{1000}`, ans:'6',
+    hint:R`\(\log\sqrt A=\tfrac12\log A\) i \(\log1000=3\).`, sol:R`\tfrac12\cdot4+7-3=6` },
+  { id:'C9', lvl:3, blk:'C', ins:I_AB, type:'exact', q:R`\log\dfrac{1000A}{\sqrt[4]{B}}`, ans:'21/4',
+    hint:R`\(\log\sqrt[4]{B}=\tfrac14\log B\).`, sol:R`3+4-\tfrac74=\tfrac{21}{4}` },
+  { id:'C10', lvl:2, blk:'C', ins:I_PROP, type:'exact', q:R`\log\sqrt{20}+\log\sqrt{5}`, ans:'1',
+    hint:R`\(\sqrt{20}\cdot\sqrt5=\sqrt{100}\).`, sol:R`\log\sqrt{100}=\log10=1` },
+  { id:'C11', lvl:2, blk:'C', ins:I_PROP, type:'exact', q:R`\log\dfrac{\sqrt[3]{100}}{10}`, ans:'-1/3',
+    hint:R`\(\log\sqrt[3]{100}=\tfrac13\log100\).`, sol:R`\tfrac13\cdot2-1=-\tfrac13` },
+  { id:'C12', lvl:2, blk:'C', ins:I_PROP, type:'exact', q:R`\log\dfrac{\sqrt{10}}{0{,}1}`, ans:'3/2',
+    hint:R`\(\log0{,}1=-1\).`, sol:R`\tfrac12-(-1)=\tfrac32` },
+  { id:'C13', lvl:2, blk:'C', ins:I_L2, type:'inlog', allow:[2], amsg:R`El valor és correcte, però només hi pot aparèixer \(\log 2\).`, q:R`\log 5`, ans:'1-log2',
+    hint:R`\(5=\tfrac{10}{2}\).`, sol:R`\log5=\log\tfrac{10}{2}=\log10-\log2=1-\log2` },
+  { id:'C14', lvl:2, blk:'C', ins:I_L2, type:'inlog', allow:[2], amsg:R`El valor és correcte, però només hi pot aparèixer \(\log 2\).`, q:R`\log 125`, ans:'3-3log2',
+    hint:R`\(125=5^3\) i \(5=\tfrac{10}{2}\).`, sol:R`\log125=3\log5=3(1-\log2)=3-3\log2` },
+  { id:'C15', lvl:3, blk:'C', ins:I_L2, type:'inlog', allow:[2], amsg:R`El valor és correcte, però només hi pot aparèixer \(\log 2\).`, q:R`\log\sqrt[3]{0{,}002}`, ans:'(log2-3)/3',
+    hint:R`\(0{,}002=2\cdot10^{-3}\).`, sol:R`\tfrac13\log\left(2\cdot10^{-3}\right)=\tfrac13\left(\log2-3\right)=\dfrac{\log2-3}{3}` },
+  { id:'C16', lvl:3, blk:'C', ins:I_L2, type:'inlog', allow:[2], amsg:R`El valor és correcte, però només hi pot aparèixer \(\log 2\).`, q:R`\log\sqrt{0{,}08}`, ans:'(3log2-2)/2',
+    hint:R`\(0{,}08=8\cdot10^{-2}=2^3\cdot10^{-2}\).`, sol:R`\tfrac12\log\left(2^3\cdot10^{-2}\right)=\tfrac12\left(3\log2-2\right)` },
+  { id:'C17', lvl:2, blk:'C', ins:I_L23, type:'inlog', allow:[2,3], amsg:R`El valor és correcte, però només hi poden aparèixer \(\log 2\) i \(\log 3\).`, q:R`\log 18`, ans:'log2+2log3',
+    hint:R`\(18=2\cdot3^2\).`, sol:R`\log\left(2\cdot3^2\right)=\log2+2\log3` },
+  { id:'C18', lvl:3, blk:'C', ins:I_L23, type:'inlog', allow:[2,3], amsg:R`El valor és correcte, però només hi poden aparèixer \(\log 2\) i \(\log 3\).`, q:R`\log 0{,}75`, ans:'log3-2log2',
+    hint:R`\(0{,}75=\tfrac34=\tfrac{3}{2^2}\).`, sol:R`\log\dfrac{3}{2^2}=\log3-2\log2` },
+  { id:'C19', lvl:3, blk:'C', ins:I_PROP, type:'exact', q:R`\log\left(4-\sqrt6\right)+\log\left(4+\sqrt6\right)`, ans:'1',
+    hint:R`Ajunta-ho en un sol logaritme i fes servir \((a-b)(a+b)=a^2-b^2\).`, sol:R`\log\left[(4-\sqrt6)(4+\sqrt6)\right]=\log(16-6)=\log10=1` },
+  { id:'C20', lvl:3, blk:'C', ins:I_PROP, type:'exact', q:R`\log\left(7-\sqrt{22}\right)+\log\left(7+\sqrt{22}\right)-3\log3`, ans:'0',
+    hint:R`\((7-\sqrt{22})(7+\sqrt{22})=49-22\) i \(3\log3=\log27\).`, sol:R`\log(49-22)-\log27=\log27-\log27=0` },
+  { id:'C21', lvl:3, blk:'C', ins:I_PROP, type:'exact', q:R`\tfrac12\log\left(12-2\sqrt{11}\right)+\tfrac12\log\left(12+2\sqrt{11}\right)`, ans:'1',
+    hint:R`Treu factor comú \(\tfrac12\) i fes servir la suma per diferència.`, sol:R`\tfrac12\log\left(144-4\cdot11\right)=\tfrac12\log100=1` },
+  { id:'C22', lvl:2, blk:'C', cur:'b', ins:'Expressa com un sol logaritme.', type:'onelog', q:R`3\log a+2\log b-\tfrac12\log c`, ans:'log(a^3b^2/√c)',
+    hint:R`Els coeficients passen a exponents; la suma es converteix en producte i la resta en quocient. Escriu-ho així: log(a^3b^2/√c).`, sol:R`\log a^3+\log b^2-\log\sqrt c=\log\dfrac{a^3b^2}{\sqrt c}` },
+  { id:'C23', lvl:2, blk:'C', cur:'b', ins:'Desenvolupa aplicant les propietats.', type:'expand', q:R`\log\dfrac{a^3\sqrt{b}}{c^2}`, ans:'3log(a)+log(b)/2-2log(c)',
+    hint:R`Escriu la resposta així: 3log(a)+(1/2)log(b)-2log(c).`, sol:R`3\log a+\tfrac12\log b-2\log c` },
+  { id:'C24', lvl:2, blk:'C', cur:'b', ins:R`Troba \(x\) en funció de \(a\), \(b\) i \(c\).`, type:'nolog', q:R`\log x=3\log a+2\log b-\tfrac12\log c`, ans:'a^3b^2/√c',
+    hint:'Expressa el segon membre com un sol logaritme i iguala els arguments.', sol:R`\log x=\log\dfrac{a^3b^2}{\sqrt c}\;\Rightarrow\;x=\dfrac{a^3b^2}{\sqrt c}` },
+  { id:'C25', lvl:3, blk:'C', cur:'b', ins:R`Troba \(x\) en funció de \(a\), \(b\), \(c\) i \(d\).`, type:'nolog', q:R`\log x=\tfrac15\left(3\log a-2\log b\right)-7\left(\log c+4\log d\right)`, ans:'arrel(5;a^3/b^2)/(c^7d^28)',
+    hint:R`Per parts: \(\tfrac15(3\log a-2\log b)=\log\sqrt[5]{\tfrac{a^3}{b^2}}\) i \(7(\log c+4\log d)=\log\left(c^7d^{28}\right)\). Per a l'arrel cinquena escriu arrel(5; …).`,
+    sol:R`x=\dfrac{\sqrt[5]{\dfrac{a^3}{b^2}}}{c^7\,d^{28}}` },
+
+  // D · Canvi de base i calculadora
+  { id:'D1', lvl:1, blk:'D', ins:I_CB, type:'approx', tol:TOL, q:R`\log_3 103`, ans:'log(103)/log(3)',
+    hint:R`\(\log_a x=\dfrac{\log x}{\log a}\).`, sol:R`\dfrac{\log103}{\log3}\approx\dfrac{2{,}0128}{0{,}4771}\approx4{,}22` },
+  { id:'D2', lvl:1, blk:'D', ins:I_CB, type:'approx', tol:TOL, q:R`\log_5 86`, ans:'log(86)/log(5)',
+    hint:R`\(\log_5 86=\dfrac{\log86}{\log5}\).`, sol:R`\dfrac{\log86}{\log5}\approx\dfrac{1{,}9345}{0{,}6990}\approx2{,}77` },
+  { id:'D3', lvl:2, blk:'D', ins:I_CB, type:'approx', tol:TOL, q:R`\log_{\sqrt2} 5`, ans:'log(5)/log(√2)',
+    hint:R`\(\log\sqrt2=\tfrac12\log2\).`, sol:R`\dfrac{\log5}{\frac12\log2}=\dfrac{2\log5}{\log2}\approx4{,}64` },
+  { id:'D4', lvl:2, blk:'D', ins:I_CB, type:'approx', tol:TOL, q:R`\log_{\frac13} 7`, ans:'log(7)/log(1/3)',
+    hint:R`\(\log\tfrac13\) és negatiu.`, sol:R`\dfrac{\log7}{\log\frac13}=-\dfrac{\log7}{\log3}\approx-1{,}77` },
+  { id:'D5', lvl:2, blk:'D', ins:R`Escriu \(\log_2 7\) com un quocient de logaritmes decimals.`, type:'inlog', allow:[7,2], amsg:R`Fes servir el canvi de base: només hi poden aparèixer \(\log 7\) i \(\log 2\).`, q:R`\log_2 7`, ans:'log7/log2',
+    hint:R`Canvi de base: \(\log_a x=\dfrac{\log x}{\log a}\).`, sol:R`\log_2 7=\dfrac{\log7}{\log2}` },
+  { id:'D6', lvl:2, blk:'D', ins:'Calcula el valor exacte passant a base 2.', type:'exact', q:R`\log_4 8`, ans:'3/2',
+    hint:R`\(\log_4 8=\dfrac{\log_2 8}{\log_2 4}\).`, sol:R`\dfrac{\log_2 8}{\log_2 4}=\dfrac32` },
+  { id:'D7', lvl:3, blk:'D', ins:'Calcula el valor exacte passant a base 2.', type:'exact', q:R`\log_8 32`, ans:'5/3',
+    hint:R`\(8=2^3\) i \(32=2^5\).`, sol:R`\dfrac{\log_2 32}{\log_2 8}=\dfrac53` },
+  { id:'D8', lvl:3, blk:'D', ins:R`Quantes xifres té el nombre \(2^{100}\)? Fes servir la calculadora per al logaritme.`, type:'exact', q:R`N=2^{100}`, ans:'31',
+    near:[{ v:30.103, tol:0.01, msg:R`Has calculat bé \(\log 2^{100}\), però la pregunta és quantes xifres té el nombre.` }],
+    hint:R`Un nombre \(N\ge1\) té \(\lfloor\log N\rfloor+1\) xifres, i \(\log2^{100}=100\log2\).`, sol:R`\log2^{100}=100\log2\approx30{,}10\;\Rightarrow\;30+1=31\ \text{xifres}` },
+
+  // E · Equacions exponencials
+  { id:'E1', lvl:1, blk:'E', ins:I_EQ, type:'sols', q:R`2^x=32`, sols:['5'],
+    hint:R`\(32=2^{\,?}\)`, sol:R`2^x=2^5\;\Rightarrow\;x=5` },
+  { id:'E2', lvl:1, blk:'E', ins:I_EQ, type:'sols', q:R`3^{x-1}=81`, sols:['5'],
+    hint:R`\(81=3^4\).`, sol:R`3^{x-1}=3^4\;\Rightarrow\;x-1=4\;\Rightarrow\;x=5` },
+  { id:'E3', lvl:1, blk:'E', ins:I_EQ, type:'sols', q:R`5^x=\tfrac{1}{25}`, sols:['-2'],
+    hint:R`\(\tfrac{1}{25}=5^{-2}\).`, sol:R`5^x=5^{-2}\;\Rightarrow\;x=-2` },
+  { id:'E4', lvl:2, blk:'E', ins:I_EQ, type:'sols', q:R`2^{x+1}=\tfrac{1}{8}`, sols:['-4'],
+    hint:R`\(\tfrac18=2^{-3}\).`, sol:R`2^{x+1}=2^{-3}\;\Rightarrow\;x+1=-3\;\Rightarrow\;x=-4` },
+  { id:'E5', lvl:2, blk:'E', ins:I_EQA, type:'sols', tol:TOL, q:R`3^x=48`, sols:['log(48)/log(3)'],
+    hint:'48 no és una potència de 3: aplica logaritmes als dos membres.', sol:R`x\log3=\log48\;\Rightarrow\;x=\dfrac{\log48}{\log3}\approx3{,}52` },
+  { id:'E6', lvl:2, blk:'E', ins:I_EQA, type:'sols', tol:TOL, q:R`2^x=\tfrac{8}{27}`, sols:['log(8/27)/log(2)'],
+    hint:R`Aplica logaritmes: \(x\log2=\log\tfrac{8}{27}\).`, sol:R`x=\dfrac{\log\frac{8}{27}}{\log2}=\dfrac{3\log2-3\log3}{\log2}\approx-1{,}75` },
+  { id:'E7', lvl:2, blk:'E', ins:I_EQA, type:'sols', tol:TOL, q:R`2^{x+1}+4=80`, sols:['log(76)/log(2)-1'],
+    hint:R`Primer aïlla la potència: \(2^{x+1}=76\).`, sol:R`2^{x+1}=76\;\Rightarrow\;(x+1)\log2=\log76\;\Rightarrow\;x=\dfrac{\log76}{\log2}-1\approx5{,}25` },
+  { id:'E8', lvl:3, blk:'E', ins:I_EQ, type:'sols', q:R`4^x=8^{x-1}`, sols:['3'],
+    hint:'Escriu les dues bases com a potències de 2.', sol:R`2^{2x}=2^{3x-3}\;\Rightarrow\;2x=3x-3\;\Rightarrow\;x=3` },
+  { id:'E9', lvl:3, blk:'E', ins:I_EQA, type:'sols', tol:TOL, q:R`5^x=2\cdot3^x`, sols:['log(2)/log(5/3)'],
+    hint:R`Pren logaritmes: \(x\log5=\log2+x\log3\). Agrupa els termes amb \(x\).`, sol:R`x(\log5-\log3)=\log2\;\Rightarrow\;x=\dfrac{\log2}{\log5-\log3}\approx1{,}36` },
+  { id:'E10', lvl:2, blk:'E', cur:'b', ins:I_EQA, type:'sols', tol:TOL, q:R`e^{2x}=5`, sols:['ln(5)/2'],
+    hint:R`Aplica \(\ln\) als dos membres: \(\ln e^{2x}=2x\).`, sol:R`2x=\ln5\;\Rightarrow\;x=\dfrac{\ln5}{2}\approx0{,}80` },
+  { id:'E11', lvl:3, blk:'E', cur:'b', ins:I_EQ, type:'sols', q:R`10^{x^2-1}=1000`, sols:['2', '-2'],
+    hint:R`\(1000=10^3\). Compte: queda una equació de segon grau.`, sol:R`x^2-1=3\;\Rightarrow\;x^2=4\;\Rightarrow\;x=2\ \text{o}\ x=-2` },
+  { id:'E12', lvl:3, blk:'E', cur:'b', ins:I_EQ, type:'sols', q:R`2^{x+1}+2^x=24`, sols:['3'],
+    hint:R`\(2^{x+1}=2\cdot2^x\). Treu factor comú \(2^x\).`, sol:R`2\cdot2^x+2^x=3\cdot2^x=24\;\Rightarrow\;2^x=8\;\Rightarrow\;x=3` },
+  { id:'E13', lvl:3, blk:'E', cur:'b', ins:I_EQ, type:'sols', q:R`4^x-3\cdot2^x-4=0`, sols:['2'],
+    hint:R`Canvi de variable: \(t=2^x\), i així \(4^x=t^2\).`, sol:R`t^2-3t-4=0\;\Rightarrow\;t=4\ \text{o}\ t=-1.\ \ 2^x=4\Rightarrow x=2.\ \ 2^x=-1\ \text{no té solució.}` },
+
+  // F · Equacions logarítmiques
+  { id:'F1', lvl:1, blk:'F', ins:I_LEQ, type:'sols', q:R`\log x=2`, sols:['100'],
+    hint:'Aplica la definició de logaritme.', sol:R`x=10^2=100` },
+  { id:'F2', lvl:1, blk:'F', ins:I_LEQ, type:'sols', q:R`\log_2(x+1)=3`, sols:['7'],
+    hint:R`\(x+1=2^3\).`, sol:R`x+1=2^3=8\;\Rightarrow\;x=7` },
+  { id:'F3', lvl:1, blk:'F', ins:I_LEQ, type:'sols', q:R`\log x+\log 4=\log 20`, sols:['5'],
+    hint:'Ajunta el primer membre en un sol logaritme.', sol:R`\log(4x)=\log20\;\Rightarrow\;4x=20\;\Rightarrow\;x=5` },
+  { id:'F4', lvl:2, blk:'F', ins:I_LEQ, type:'sols', q:R`\log(5-x)-\log(4-x)=\log2`, sols:['3'],
+    hint:R`\(\log\dfrac{5-x}{4-x}=\log2\).`, sol:R`\dfrac{5-x}{4-x}=2\;\Rightarrow\;5-x=8-2x\;\Rightarrow\;x=3.\ \ \text{Comprovació: }5-3>0,\ 4-3>0\ \checkmark` },
+  { id:'F5', lvl:2, blk:'F', ins:I_LEQ + ' Dona el resultat exacte o arrodonit a les centèsimes.', type:'sols', tol:TOL, q:R`3\log x-4\log2=3\log3`, sols:['∛432'],
+    hint:R`Passa els coeficients a exponents: \(\log x^3=\log\left(3^3\cdot2^4\right)\).`, sol:R`x^3=27\cdot16=432\;\Rightarrow\;x=\sqrt[3]{432}=6\sqrt[3]{2}\approx7{,}56` },
+  { id:'F6', lvl:2, blk:'F', ins:I_LEQ, type:'sols', q:R`\log x+\log(x+6)=\log16`, sols:['2'], reject:['-8'],
+    hint:R`\(x(x+6)=16\). Comprova les dues solucions.`, sol:R`x^2+6x-16=0\;\Rightarrow\;x=2\ \text{o}\ x=-8.\ \ \text{Amb }x=-8\text{ apareix }\log(-8)\text{: no vàlida.}` },
+  { id:'F7', lvl:2, blk:'F', ins:I_LEQ, type:'sols', q:R`\log_2 x+\log_2(x-2)=3`, sols:['4'], reject:['-2'],
+    hint:R`\(x(x-2)=2^3\).`, sol:R`x^2-2x-8=0\;\Rightarrow\;x=4\ \text{o}\ x=-2\ (\text{no vàlida})` },
+  { id:'F8', lvl:3, blk:'F', ins:I_LEQ, type:'sols', q:R`\log\left(x^2+2x-39\right)-\log(3x-1)=1`, sols:['29'], reject:['-1'],
+    hint:R`\(1=\log10\): \(\dfrac{x^2+2x-39}{3x-1}=10\).`, sol:R`x^2+2x-39=30x-10\;\Rightarrow\;x^2-28x-29=0\;\Rightarrow\;x=29\ \text{o}\ x=-1.\ \ \text{Amb }x=-1:\ 3x-1=-4\lt 0\text{: no vàlida.}` },
+  { id:'F9', lvl:3, blk:'F', ins:I_LEQ, type:'sols', q:R`2\log x-\log(x-16)=2`, sols:['20', '80'],
+    hint:R`\(2=\log100\) i \(2\log x=\log x^2\).`, sol:R`\dfrac{x^2}{x-16}=100\;\Rightarrow\;x^2-100x+1600=0\;\Rightarrow\;x=20\ \text{o}\ x=80.\ \ \text{Totes dues compleixen }x>16\ \checkmark` },
+  { id:'F10', lvl:3, blk:'F', ins:I_LEQ, type:'sols', q:R`\log x^2-\log\left(x+\tfrac{11}{10}\right)=1`, sols:['11', '-1'],
+    hint:R`Compte: \(\log x^2\) existeix també quan \(x\) és negatiu. Comprova bé les dues solucions.`,
+    sol:R`\dfrac{x^2}{x+\frac{11}{10}}=10\;\Rightarrow\;x^2-10x-11=0\;\Rightarrow\;x=11\ \text{o}\ x=-1.\ \ \text{Amb }x=-1:\ \log1-\log0{,}1=0+1=1\ \checkmark.\ \ \text{Si canvies }\log x^2\text{ per }2\log x\text{, perds }x=-1.` },
+  { id:'F11', lvl:3, blk:'F', cur:'b', ins:I_LEQ, type:'sols', q:R`\ln x+\ln(x+1)=\ln6`, sols:['2'], reject:['-3'],
+    hint:R`\(\ln\left[x(x+1)\right]=\ln6\).`, sol:R`x^2+x-6=0\;\Rightarrow\;x=2\ \text{o}\ x=-3\ (\text{no vàlida})` },
+  { id:'F12', lvl:3, blk:'F', ins:I_LEQ, type:'sols', q:R`\log(x+1)=1+\log(x-2)`, sols:['7/3'],
+    hint:R`\(1+\log(x-2)=\log10+\log(x-2)=\log\left[10(x-2)\right]\).`, sol:R`x+1=10x-20\;\Rightarrow\;9x=21\;\Rightarrow\;x=\tfrac73.\ \ x-2=\tfrac13>0\ \checkmark` },
+
+  // G · Problemes amb context
+  { id:'G1', lvl:1, blk:'G', type:'approx', tol:TOL, ins:R`Un sismògraf detecta un terratrèmol amb una amplitud \(A=2000\) unitats. L'amplitud de referència és \(A_0=1\). Calcula'n la magnitud a l'escala de Richter (centèsimes).`,
+    q:R`M=\log\dfrac{A}{A_0}`, ans:'log(2000)',
+    hint:R`Substitueix: \(M=\log\frac{2000}{1}\).`, sol:R`M=\log2000\approx3{,}30` },
+  { id:'G2', lvl:2, blk:'G', type:'approx', rel:0.0005, ins:R`Un terratrèmol té magnitud 6,2 a l'escala de Richter i \(A_0=1\). Quina amplitud \(A\) ha mesurat el sismògraf? Arrodoneix a les unitats.`,
+    q:R`6{,}2=\log\dfrac{A}{1}`, ans:'10^6.2',
+    hint:R`Definició de logaritme: \(\log A=6{,}2\iff A=10^{6{,}2}\).`, sol:R`A=10^{6{,}2}\approx1\,584\,893\ \text{unitats}` },
+  { id:'G3', lvl:1, blk:'G', type:'approx', tol:0, ins:R`Dipositem 5 000 € al 4 % d'interès compost anual. Quants anys complets han de passar perquè el capital superi els 6 000 €?`,
+    q:R`C(t)=5000\cdot1{,}04^t`, ans:'5',
+    near:[{ v:4.6486, tol:0.01, msg:R`Has calculat bé \(t\approx4{,}65\), però els interessos s'abonen al final de cada any: quants anys <b>complets</b> calen?` }],
+    hint:R`Planteja \(5000\cdot1{,}04^t=6000\), aïlla la potència i aplica logaritmes.`, sol:R`1{,}04^t=1{,}2\;\Rightarrow\;t=\dfrac{\log1{,}2}{\log1{,}04}\approx4{,}65.\ \ \text{Com que s'abonen cada any, calen }5\text{ anys.}` },
+  { id:'G4', lvl:2, blk:'G', type:'approx', tol:TOL, ins:R`Un autocar de línia costa 120 000 € i es deprecia un 12 % cada any: \(V(t)=V_0(1-r)^t\). Quants anys han de passar perquè valgui la meitat? Centèsimes.`,
+    q:R`120\,000\cdot0{,}88^t=60\,000`, ans:'log(0.5)/log(0.88)',
+    hint:R`Divideix per 120 000: \(0{,}88^t=0{,}5\).`, sol:R`t=\dfrac{\log0{,}5}{\log0{,}88}\approx5{,}42\ \text{anys}\ \approx5\ \text{anys i }5\text{ mesos}` },
+  { id:'G5', lvl:2, blk:'G', cur:'b', type:'approx', tol:TOL, ins:R`Una màquina industrial es devalua segons \(V(t)=45\,000\cdot e^{-0{,}08t}\) (euros, anys). Quants anys han de passar perquè valgui 15 000 €? Centèsimes.`,
+    q:R`45\,000\cdot e^{-0{,}08t}=15\,000`, ans:'ln(3)/0.08',
+    hint:R`Aïlla la potència: \(e^{-0{,}08t}=\tfrac13\). Després aplica \(\ln\).`, sol:R`-0{,}08t=\ln\tfrac13\;\Rightarrow\;t=\dfrac{\ln3}{0{,}08}\approx13{,}73\ \text{anys}` },
+  { id:'G6', lvl:3, blk:'G', cur:'b', type:'approx', tol:TOL, ins:R`Una plataforma de streaming té \(P(t)=5000\cdot e^{0{,}35t}\) usuaris, amb \(t\) en mesos. Quant de temps ha de passar perquè arribi als 100 000 usuaris? Mesos, amb centèsimes.`,
+    q:R`5000\cdot e^{0{,}35t}=100\,000`, ans:'ln(20)/0.35',
+    hint:R`\(e^{0{,}35t}=20\).`, sol:R`t=\dfrac{\ln20}{0{,}35}\approx8{,}56\ \text{mesos: han passat 8 mesos i uns 17 dies, és a dir, hi arriba durant el 9è mes.}` },
+  { id:'G7', lvl:2, blk:'G', type:'approx', tol:TOL, ins:R`El pH d'una dissolució és \(\text{pH}=-\log\,[\text{H}^+]\). Calcula el pH d'un suc amb \([\text{H}^+]=3{,}2\cdot10^{-4}\) mol/L (centèsimes).`,
+    q:R`\text{pH}=-\log\left(3{,}2\cdot10^{-4}\right)`, ans:'-log(3.2*10^-4)',
+    hint:R`\(\log\left(3{,}2\cdot10^{-4}\right)=\log3{,}2-4\).`, sol:R`\text{pH}=-(\log3{,}2-4)=4-\log3{,}2\approx3{,}49` },
+  { id:'G8', lvl:3, blk:'G', type:'approx', rel:0.002, ins:R`La sang té un pH de 7,4. Calcula la concentració \([\text{H}^+]\) en mol/L. Escriu-la en notació científica, per exemple 2,5·10^-6.`,
+    q:R`7{,}4=-\log\,[\text{H}^+]`, ans:'10^-7.4',
+    hint:R`\(\log[\text{H}^+]=-7{,}4\iff[\text{H}^+]=10^{-7{,}4}\).`, sol:R`[\text{H}^+]=10^{-7{,}4}\approx3{,}98\cdot10^{-8}\ \text{mol/L}` },
+  { id:'G9', lvl:1, blk:'G', type:'approx', tol:0.01, ins:R`El nivell sonor és \(L=10\log\dfrac{I}{I_0}\) dB, amb \(I_0=10^{-12}\) W/m². Calcula el nivell d'una conversa amb \(I=10^{-6}\) W/m².`,
+    q:R`L=10\log\dfrac{10^{-6}}{10^{-12}}`, ans:'60',
+    hint:R`\(\dfrac{10^{-6}}{10^{-12}}=10^{6}\).`, sol:R`L=10\log10^{6}=10\cdot6=60\ \text{dB}` },
+  { id:'G10', lvl:3, blk:'G', type:'approx', tol:0.01, ins:'Si la intensitat d\'un so es multiplica per 100, quants decibels augmenta el nivell sonor?',
+    q:R`L'=10\log\dfrac{100\,I}{I_0}`, ans:'20',
+    hint:R`Propietat del producte: \(\log\left(100\cdot\tfrac{I}{I_0}\right)=\log100+\log\tfrac{I}{I_0}\).`, sol:R`L'=10\left(2+\log\tfrac{I}{I_0}\right)=20+L.\ \ \text{Augmenta }20\text{ dB.}` },
+  { id:'G11', lvl:3, blk:'G', type:'approx', tol:0, ins:R`Un full fa 0,1 mm de gruix i cada doblec en duplica el gruix. Quants doblecs calen, com a mínim, perquè el gruix superi la distància Terra–Lluna (384 000 km)?`,
+    q:R`0{,}1\cdot2^n>3{,}84\cdot10^{11}\ \text{mm}`, ans:'42',
+    near:[{ v:41.804, tol:0.01, msg:R`Has calculat bé l'exponent, però el nombre de doblecs ha de ser enter i el gruix ha de <b>superar</b> la distància.` }],
+    hint:R`Passa-ho tot a mil·límetres: 384 000 km = \(3{,}84\cdot10^{11}\) mm.`, sol:R`2^n>3{,}84\cdot10^{12}\;\Rightarrow\;n>\dfrac{\log\left(3{,}84\cdot10^{12}\right)}{\log2}\approx41{,}8\;\Rightarrow\;n=42` },
+  { id:'G12', lvl:3, blk:'G', type:'approx', tol:0.06, ins:R`Dos terratrèmols tenen magnituds 7,1 i 5,3. Quantes vegades més gran és l'amplitud del primer que la del segon? (dècimes)`,
+    q:R`M_1-M_2=\log\dfrac{A_1}{A_0}-\log\dfrac{A_2}{A_0}=\log\dfrac{A_1}{A_2}`, ans:'10^1.8',
+    hint:'La diferència de magnituds és el logaritme del quocient de les amplituds.', sol:R`\log\dfrac{A_1}{A_2}=1{,}8\;\Rightarrow\;\dfrac{A_1}{A_2}=10^{1{,}8}\approx63{,}1` },
+  { id:'G13', lvl:2, blk:'G', type:'approx', tol:TOL, ins:R`Una ciutat té 80 000 habitants i creix un 2,5 % anual. Quant de temps trigarà a arribar als 100 000 habitants? Anys, amb centèsimes.`,
+    q:R`80\,000\cdot1{,}025^t=100\,000`, ans:'log(1.25)/log(1.025)',
+    hint:R`\(1{,}025^t=1{,}25\).`, sol:R`t=\dfrac{\log1{,}25}{\log1{,}025}\approx9{,}04\ \text{anys}` },
+  { id:'G14', lvl:3, blk:'G', cur:'b', type:'approx', rel:0.0006, ins:R`Un fòssil conserva el 30 % del carboni-14 inicial. Si \(N(t)=N_0\left(\tfrac12\right)^{t/5730}\), quina antiguitat té? Anys, arrodonit a les unitats.`,
+    q:R`N_0\left(\tfrac12\right)^{t/5730}=0{,}3\,N_0`, ans:'5730*log(0.3)/log(0.5)',
+    hint:R`Simplifica \(N_0\) i aplica logaritmes a \(\left(\tfrac12\right)^{t/5730}=0{,}3\).`, sol:R`\dfrac{t}{5730}\log\tfrac12=\log0{,}3\;\Rightarrow\;t=5730\cdot\dfrac{\log0{,}3}{\log0{,}5}\approx9953\ \text{anys}` }
+];
+
+/* Preguntes obertes de l'avaluació final */
+const EVAL_OPEN = [
+  { id:'12', type:'exact', ins:I_DEF, q:R`\log_2\tfrac18+\log_3\sqrt3`, ans:'-5/2', hint:'', sol:R`-3+\tfrac12=-\tfrac52` },
+  { id:'13', type:'sols', tol:TOL, ins:I_EQA + ' Pots fer servir la calculadora.', q:R`5^{x+2}=40`, sols:['log(40)/log(5)-2'], hint:'', sol:R`(x+2)\log5=\log40\;\Rightarrow\;x=\dfrac{\log40}{\log5}-2\approx0{,}29` },
+  { id:'14', type:'sols', ins:I_LEQ, q:R`\log(x+2)+\log(x-1)=1`, sols:['3'], reject:['-4'], hint:'', sol:R`(x+2)(x-1)=10\;\Rightarrow\;x^2+x-12=0\;\Rightarrow\;x=3\ \text{o}\ x=-4\ (\text{no vàlida})` }
+];
+if (typeof module !== 'undefined') module.exports = { EX, EVAL_OPEN, BLOCKS };
+
+(function () {
+  if (typeof document === 'undefined') return;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const num = (v, d = 2) => v.toLocaleString('ca-ES', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const texNum = (v, d = 4) => {
+    const r = +v.toFixed(d);
+    return (Number.isInteger(r) ? String(r) : String(r)).replace('.', '{,}');
+  };
+  function toFrac(y) {
+    for (let d = 1; d <= 12; d++) {
+      const n = Math.round(y * d);
+      if (Math.abs(y - n / d) < 1e-9) {
+        if (d === 1) return String(n);
+        return (n < 0 ? '-' : '') + '\\tfrac{' + Math.abs(n) + '}{' + d + '}';
+      }
+    }
+    return null;
+  }
+
+  /* ---------- emmagatzematge local (només comoditat) ---------- */
+  const KEY = 'logaritmes5e-v1';
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { store = {}; }
+  store.done = store.done || {}; store.self = store.self || {};
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} };
+
+  /* ---------- MathJax ---------- */
+  const mjReady = () => (window.MathJax && MathJax.startup && MathJax.startup.promise) ? MathJax.startup.promise : Promise.reject();
+  function typeset(els) {
+    return mjReady().then(() => {
+      if (MathJax.typesetClear) MathJax.typesetClear(els);
+      return MathJax.typesetPromise(els);
+    }).catch(() => {});
+  }
+
+  /* ---------- rutes ---------- */
+  const VIEWS = ['inici', 'implica', 'explora', 'explica', 'aplica', 'avalua'];
+  function route() {
+    const h = location.hash.replace('#', '');
+    let v = VIEWS.includes(h) ? h : null;
+    let jump = null;
+    if (!v && /^ex[1-7]$/.test(h)) { v = 'explica'; jump = h; }
+    v = v || 'inici';
+    VIEWS.forEach(n => { $('#v-' + n).hidden = n !== v; });
+    $$('.phases a').forEach(a => a.setAttribute('aria-current', a.dataset.v === v ? 'page' : 'false'));
+    const cur = $('.phases a[aria-current="page"]');
+    if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    if (jump) { const el = document.getElementById(jump); if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30); }
+    else window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route);
+
+  /* ---------- opció múltiple ---------- */
+  function renderMC(box, item, onAnswer) {
+    box.innerHTML = '';
+    const q = document.createElement('p'); q.className = 'qtext'; q.innerHTML = item.q; box.appendChild(q);
+    const opts = document.createElement('div'); opts.className = 'opts'; box.appendChild(opts);
+    const fb = document.createElement('div'); fb.setAttribute('role', 'status'); box.appendChild(fb);
+    item.o.forEach((t, i) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.innerHTML = t;
+      b.addEventListener('click', () => {
+        const ok = i === item.c;
+        $$('.opt', opts).forEach((x, j) => { x.disabled = true; if (j === item.c) x.classList.add('right'); });
+        if (!ok) b.classList.add('wrong');
+        fb.className = 'fb ' + (ok ? 'ok' : 'ko');
+        fb.innerHTML = '<b>' + (ok ? 'Correcte.' : 'No és correcte.') + '</b> ' + item.f;
+        typeset([fb]);
+        if (onAnswer) onAnswer(ok);
+      });
+      opts.appendChild(b);
+    });
+  }
+
+  /* ---------- INICI: curs ---------- */
+  const CURS = [['4t', '4t d\'ESO'], ['m1', 'Matemàtiques I'], ['macs', 'MACS I']];
+  const CURMSG = {
+    '4t': 'Veuràs primer els exercicis de 4t. Els marcats amb Batx són ampliació: els pots activar a Aplica.',
+    m1: 'Tens tots els continguts disponibles, inclosos els de Batxillerat.',
+    macs: 'Tens tots els continguts disponibles. Posa especial atenció als problemes d\'interès compost, depreciació i creixement de poblacions (bloc G).'
+  };
+  /* ---------- IMPLICA'T ---------- */
+  (function savings() {
+    const svg = $('#sPlot');
+    const X0 = 40, X1 = 310, Y0 = 180, Y1 = 12, TMAX = 25, CMAX = 3500;
+    const sx = t => X0 + (X1 - X0) * t / TMAX, sy = c => Y0 - (Y0 - Y1) * c / CMAX;
+    let g = '';
+    for (let t = 0; t <= TMAX; t += 5) g += `<line x1="${sx(t)}" y1="${Y1}" x2="${sx(t)}" y2="${Y0}" stroke="var(--line)"/><text x="${sx(t)}" y="${Y0 + 14}" font-size="10" text-anchor="middle" fill="var(--muted)" font-family="JetBrains Mono, monospace">${t}</text>`;
+    for (let c = 0; c <= CMAX; c += 1000) g += `<line x1="${X0}" y1="${sy(c)}" x2="${X1}" y2="${sy(c)}" stroke="var(--line)"/><text x="${X0 - 4}" y="${sy(c) + 3}" font-size="10" text-anchor="end" fill="var(--muted)" font-family="JetBrains Mono, monospace">${c}</text>`;
+    let d = '';
+    for (let t = 0; t <= TMAX + 1e-9; t += 0.25) d += (t ? 'L' : 'M') + sx(t).toFixed(1) + ',' + sy(1000 * Math.pow(1.05, t)).toFixed(1);
+    g += `<line x1="${X0}" y1="${sy(2000)}" x2="${X1}" y2="${sy(2000)}" stroke="var(--p5)" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+    g += `<text x="${X1}" y="${sy(2000) - 5}" font-size="10" text-anchor="end" fill="var(--p5)" font-family="JetBrains Mono, monospace">2000 €</text>`;
+    g += `<path d="${d}" fill="none" stroke="var(--p1)" stroke-width="2.5"/>`;
+    g += `<line id="sGuide" x1="0" y1="${Y0}" x2="0" y2="0" stroke="var(--p1)" stroke-dasharray="2 3"/><circle id="sDot" r="6" fill="var(--p1)" stroke="var(--sheet)" stroke-width="2"/>`;
+    g += `<text x="${X1}" y="${Y0 + 28}" font-size="10" text-anchor="end" fill="var(--muted)" font-family="JetBrains Mono, monospace">anys</text>`;
+    svg.innerHTML = g;
+    const r = $('#sT'), n = $('#sTNum');
+    function upd(v, from) {
+      v = Math.max(0, Math.min(TMAX, +v || 0));
+      if (from !== 'r') r.value = v;
+      if (from !== 'n') n.value = +v.toFixed(4);
+      $('#sTOut').textContent = num(v);
+      const C = 1000 * Math.pow(1.05, v);
+      $('#sDot').setAttribute('cx', sx(v)); $('#sDot').setAttribute('cy', sy(C));
+      $('#sGuide').setAttribute('x1', sx(v)); $('#sGuide').setAttribute('x2', sx(v)); $('#sGuide').setAttribute('y2', sy(C));
+      $('#sCap').textContent = num(C) + ' €';
+      const df = 2000 - C, msg = $('#sMsg');
+      if (Math.abs(df) < 0.005) msg.textContent = 'Exacte als cèntims! Quantes xifres decimals has necessitat?';
+      else if (Math.abs(df) < 1) msg.textContent = 'Molt a prop! Però encara no és exacte. Pots afinar més?';
+      else if (df > 0) msg.textContent = 'Ens falten ' + num(df) + ' €.';
+      else msg.textContent = 'Ens sobren ' + num(-df) + ' €.';
+    }
+    r.addEventListener('input', () => upd(r.value, 'r'));
+    n.addEventListener('input', () => upd(n.value, 'n'));
+    $('#sReveal').addEventListener('click', () => { $('#sExplain').hidden = false; });
+    upd(10);
+  })();
+
+  renderMC($('#mcRichter'), {
+    q: 'Quantes vegades més gran és l\'amplitud de les ones d\'un terratrèmol de magnitud 8 que la d\'un de magnitud 4?',
+    o: ['2 vegades', '4 vegades', '40 vegades', '10 000 vegades'],
+    c: 3,
+    f: 'Cada punt de l\'escala multiplica l\'amplitud per 10: de 4 a 8 hi ha 4 punts, així que l\'amplitud es multiplica per \\(10^4=10\\,000\\). L\'escala «comprimeix» nombres enormes en nombres petits: és una <b>escala logarítmica</b>.'
+  });
+  renderMC($('#mcPaper'), {
+    q: 'Quants doblecs creus que caldrien?',
+    o: ['Uns 42', 'Uns 1 000', 'Uns 100 000', 'Uns 4 000 milions'],
+    c: 0,
+    f: 'Amb \\(n\\) doblecs el gruix és \\(0{,}1\\cdot2^n\\) mm. Volem \\(2^n>3{,}84\\cdot10^{12}\\), i això passa per primera vegada amb \\(n=42\\). Per trobar aquest exponent sense provar-ho tot, necessitem logaritmes: \\(n>\\log_2\\left(3{,}84\\cdot10^{12}\\right)\\approx41{,}8\\).'
+  });
+  const tn = $('#thinkNote');
+  try { tn.value = localStorage.getItem(KEY + '-think') || ''; } catch (e) {}
+  tn.addEventListener('input', () => { try { localStorage.setItem(KEY + '-think', tn.value); } catch (e) {} });
+
+  /* ---------- EXPLORA ---------- */
+  renderMC($('#mcPredict'), {
+    q: 'Quant creus que val \\(\\log_2 32\\)?',
+    o: ['\\(16\\)', '\\(5\\)', '\\(64\\)', '\\(2{,}5\\)'],
+    c: 1,
+    f: '\\(\\log_2 32=5\\) perquè \\(2^5=32\\). El logaritme és un <b>exponent</b>: el que cal posar a la base per obtenir el nombre. Comprova-ho a la màquina.'
+  });
+  (function machine() {
+    const BASES = [['2', 2, '2'], ['3', 3, '3'], ['5', 5, '5'], ['10', 10, '10'], ['e', Math.E, 'e'], ['1/2', 0.5, '\\frac12']];
+    let bi = 0;
+    const box = $('#mBase');
+    box.innerHTML = BASES.map((b, i) => `<button type="button" class="chip" data-i="${i}" aria-pressed="${i === bi}">Base ${b[0]}</button>`).join('');
+    box.addEventListener('click', e => {
+      const b = e.target.closest('.chip'); if (!b) return;
+      bi = +b.dataset.i; $$('.chip', box).forEach(c => c.setAttribute('aria-pressed', c === b)); upd();
+    });
+    let t;
+    function upd() {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        const [, a, at] = BASES[bi];
+        const L = a === 10 ? '\\log' : (a === Math.E ? '\\ln' : '\\log_{' + at + '}');
+        const pw = a === 0.5 ? '\\left(\\tfrac12\\right)' : at;
+        const outL = $('#mLog'), outP = $('#mPow');
+        let x, xt;
+        try { const ast = LOG.parse($('#mX').value); x = LOG.ev(ast, {}); xt = LOG.tex(ast); }
+        catch (e) { outL.textContent = e.message; outP.textContent = ''; return; }
+        if (!isFinite(x)) { outL.textContent = 'Escriu un nombre.'; outP.textContent = ''; return; }
+        if (x <= 0) {
+          outL.innerHTML = `\\(${L} ${xt.startsWith('-') ? '\\left(' + xt + '\\right)' : xt}\\) no existeix`;
+          outP.innerHTML = `Cap potència \\(${pw}^{\\,y}\\) dona ${x === 0 ? 'zero' : 'un nombre negatiu'}.`;
+        } else {
+          const y = Math.log(x) / Math.log(a);
+          const fr = toFrac(y);
+          const yt = fr !== null ? fr : '\\approx ' + texNum(y);
+          const arg = /^[0-9a-z{},\\.]+$/i.test(xt) ? xt : '\\left(' + xt + '\\right)';
+          outL.innerHTML = `\\(${L} ${arg}${fr !== null ? '=' : ''}${yt}\\)`;
+          outP.innerHTML = fr !== null ? `\\(${pw}^{${fr}}=${xt}\\)` : `\\(${pw}^{${texNum(y)}}\\approx ${xt}\\)`;
+        }
+        typeset([outL, outP]);
+      }, 150);
+    }
+    $('#mX').addEventListener('input', upd);
+    upd();
+  })();
+
+  (function graph() {
+    const svg = $('#gPlot');
+    const U = 30, OX = 90, OY = 210, MIN = -3, MAX = 7;
+    const sx = x => OX + U * x, sy = y => OY - U * y;
+    let g = '<defs><clipPath id="gClip"><rect x="0" y="0" width="300" height="300"/></clipPath></defs>';
+    for (let k = MIN; k <= MAX; k++) {
+      g += `<line x1="${sx(k)}" y1="0" x2="${sx(k)}" y2="300" stroke="var(--line)" stroke-width="${k === 0 ? 0 : 1}"/>`;
+      g += `<line x1="0" y1="${sy(k)}" x2="300" y2="${sy(k)}" stroke="var(--line)" stroke-width="${k === 0 ? 0 : 1}"/>`;
+    }
+    g += `<line x1="0" y1="${OY}" x2="300" y2="${OY}" stroke="var(--muted)" stroke-width="1.2"/><line x1="${OX}" y1="0" x2="${OX}" y2="300" stroke="var(--muted)" stroke-width="1.2"/>`;
+    for (let k = MIN + 1; k < MAX; k++) if (k) {
+      g += `<text x="${sx(k)}" y="${OY + 12}" font-size="9" text-anchor="middle" fill="var(--muted)" font-family="JetBrains Mono, monospace">${k}</text>`;
+      g += `<text x="${OX - 5}" y="${sy(k) + 3}" font-size="9" text-anchor="end" fill="var(--muted)" font-family="JetBrains Mono, monospace">${k}</text>`;
+    }
+    g += `<line x1="${sx(MIN)}" y1="${sy(MIN)}" x2="${sx(MAX)}" y2="${sy(MAX)}" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="5 4"/>`;
+    g += `<g clip-path="url(#gClip)"><path id="gExp" fill="none" stroke="var(--p1)" stroke-width="2.5"/><path id="gLog" fill="none" stroke="var(--p2)" stroke-width="2.5"/>`;
+    g += `<line id="gPQ" stroke="var(--ink)" stroke-width="1" stroke-dasharray="3 3"/><circle id="gP" r="5.5" fill="var(--p1)" stroke="var(--sheet)" stroke-width="2"/><circle id="gQ" r="5.5" fill="var(--p2)" stroke="var(--sheet)" stroke-width="2"/>`;
+    g += `<text id="gPl" font-size="12" font-weight="700" fill="var(--p1)" font-family="Bricolage Grotesque, sans-serif">P</text><text id="gQl" font-size="12" font-weight="700" fill="var(--p2)" font-family="Bricolage Grotesque, sans-serif">Q</text>`;
+    g += `<circle cx="${sx(1)}" cy="${sy(0)}" r="3" fill="var(--p2)"/><circle cx="${sx(0)}" cy="${sy(1)}" r="3" fill="var(--p1)"/></g>`;
+    svg.innerHTML = g;
+    const A = $('#gA'), T = $('#gT');
+    const cap = v => Math.max(-50, Math.min(50, v));
+    const fmt = v => (Math.abs(v - Math.round(v)) < 1e-9 ? String(Math.round(v)) : num(v, 2).replace(/0$/, ''));
+    function upd() {
+      const a = +(+A.value).toFixed(2), t = +T.value;
+      $('#gAo').textContent = String(a).replace('.', ',');
+      $('#gTo').textContent = String(t).replace('.', ',');
+      const rd = $('#gRead');
+      if (Math.abs(a - 1) < 1e-9) {
+        ['gExp', 'gLog'].forEach(id => $('#' + id).setAttribute('d', ''));
+        ['gP', 'gQ', 'gPQ', 'gPl', 'gQl'].forEach(id => $('#' + id).style.display = 'none');
+        rd.innerHTML = '<span style="font-family:var(--body)">Amb \\(a=1\\) no hi ha logaritme: \\(1^x=1\\) per a qualsevol \\(x\\), i la «corba» exponencial és una recta horitzontal.</span>';
+        typeset([rd]); return;
+      }
+      ['gP', 'gQ', 'gPQ', 'gPl', 'gQl'].forEach(id => $('#' + id).style.display = '');
+      let de = '', dl = '';
+      for (let x = -8; x <= 9; x += 0.02) {
+        const y = Math.pow(a, x);
+        de += (de ? 'L' : 'M') + sx(x).toFixed(1) + ',' + sy(cap(y)).toFixed(1);
+        dl += (dl ? 'L' : 'M') + sx(cap(y)).toFixed(1) + ',' + sy(x).toFixed(1);
+      }
+      $('#gExp').setAttribute('d', de); $('#gLog').setAttribute('d', dl);
+      const py = Math.pow(a, t);
+      const P = [sx(t), sy(cap(py))], Q = [sx(cap(py)), sy(t)];
+      $('#gP').setAttribute('cx', P[0]); $('#gP').setAttribute('cy', P[1]);
+      $('#gQ').setAttribute('cx', Q[0]); $('#gQ').setAttribute('cy', Q[1]);
+      $('#gPQ').setAttribute('x1', P[0]); $('#gPQ').setAttribute('y1', P[1]); $('#gPQ').setAttribute('x2', Q[0]); $('#gPQ').setAttribute('y2', Q[1]);
+      $('#gPl').setAttribute('x', P[0] - 14); $('#gPl').setAttribute('y', P[1] - 6);
+      $('#gQl').setAttribute('x', Q[0] + 7); $('#gQl').setAttribute('y', Q[1] + 14);
+      const at = String(a).replace('.', '{,}');
+      const rel = Math.abs(py - +py.toFixed(2)) < 1e-9 ? '=' : '\\approx';
+      rd.innerHTML = `<span>\\(P=\\left(${fmt(t).replace(',', '{,}')},\\ ${fmt(py).replace(',', '{,}')}\\right)\\)</span><span>\\(Q=\\left(${fmt(py).replace(',', '{,}')},\\ ${fmt(t).replace(',', '{,}')}\\right)\\)</span>` +
+        `<span style="font-family:var(--body);font-size:.95rem;color:var(--muted)">\\(${at}^{${fmt(t).replace(',', '{,}')}}${rel}${fmt(py).replace(',', '{,}')}\\;\\Longleftrightarrow\\;\\log_{${at}}${fmt(py).replace(',', '{,}')}${rel}${fmt(t).replace(',', '{,}')}\\)</span>` +
+        `<span style="font-family:var(--body);font-size:.95rem">${a > 1 ? 'Amb \\(a>1\\), totes dues funcions són creixents.' : 'Amb \\(0\\lt a\\lt 1\\), totes dues funcions són decreixents.'}</span>`;
+      typeset([rd]);
+    }
+    let tm;
+    const later = () => { clearTimeout(tm); tm = setTimeout(upd, 40); };
+    A.addEventListener('input', later); T.addEventListener('input', later);
+    upd();
+  })();
+  renderMC($('#mcGraph'), {
+    q: 'Per quin punt passen totes les gràfiques \\(y=\\log_a x\\), sigui quina sigui la base?',
+    o: ['\\((0,1)\\)', '\\((1,0)\\)', '\\((0,0)\\)', '\\((1,1)\\)'],
+    c: 1,
+    f: 'Perquè \\(\\log_a 1=0\\) per a qualsevol base (\\(a^0=1\\)). És el simètric del punt \\((0,1)\\), per on passen totes les exponencials. Les dues gràfiques són simètriques respecte de la recta \\(y=x\\): són <b>funcions inverses</b>.'
+  });
+
+  (function props() {
+    const lg = Math.log10;
+    const P = [
+      { l: '\\log(a\\cdot b)=\\log a+\\log b', L: (a, b) => lg(a * b), R: (a, b) => lg(a) + lg(b), always: true },
+      { l: '\\log(a+b)=\\log a+\\log b', L: (a, b) => lg(a + b), R: (a, b) => lg(a) + lg(b), always: false },
+      { l: '\\log\\dfrac ab=\\log a-\\log b', L: (a, b) => lg(a / b), R: (a, b) => lg(a) - lg(b), always: true },
+      { l: '\\log(a\\cdot b)=\\log a\\cdot\\log b', L: (a, b) => lg(a * b), R: (a, b) => lg(a) * lg(b), always: false },
+      { l: '\\log a^3=3\\log a', L: a => lg(Math.pow(a, 3)), R: a => 3 * lg(a), always: true },
+      { l: '\\dfrac{\\log a}{\\log b}=\\log\\dfrac ab', L: (a, b) => (lg(b) === 0 ? NaN : lg(a) / lg(b)), R: (a, b) => lg(a / b), always: false },
+      { l: '\\log\\sqrt a=\\tfrac12\\log a', L: a => lg(Math.sqrt(a)), R: a => lg(a) / 2, always: true },
+      { l: '\\left(\\log a\\right)^2=2\\log a', L: a => lg(a) * lg(a), R: a => 2 * lg(a), always: false }
+    ];
+    const body = $('#propBody'); const answers = {};
+    body.innerHTML = P.map((p, i) => `<tr data-i="${i}"><td>\\(${p.l}\\)</td><td class="num" data-l></td><td class="num" data-r></td><td class="eq" data-e></td>
+      <td><span class="seg" role="group" aria-label="Classificació"><button type="button" data-a="1">Sempre</button><button type="button" data-a="0">No sempre</button></span></td></tr>`).join('');
+    const fmtv = v => isNaN(v) || !isFinite(v) ? 'no existeix' : (+v.toFixed(4)).toLocaleString('ca-ES', { maximumFractionDigits: 4 });
+    function upd() {
+      const a = parseFloat($('#pa').value), b = parseFloat($('#pb').value);
+      P.forEach((p, i) => {
+        const tr = body.children[i];
+        if (isNaN(a) || isNaN(b) || a <= 0 || b <= 0) { $('[data-l]', tr).textContent = '–'; $('[data-r]', tr).textContent = '–'; $('[data-e]', tr).textContent = ''; return; }
+        const L = p.L(a, b), R = p.R(a, b);
+        $('[data-l]', tr).textContent = fmtv(L); $('[data-r]', tr).textContent = fmtv(R);
+        const eq = isFinite(L) && isFinite(R) && Math.abs(L - R) < 1e-9;
+        const e = $('[data-e]', tr); e.textContent = eq ? '=' : '≠'; e.className = 'eq ' + (eq ? 'yes' : 'no');
+      });
+    }
+    body.addEventListener('click', ev => {
+      const btn = ev.target.closest('button[data-a]'); if (!btn) return;
+      const tr = btn.closest('tr'), i = +tr.dataset.i, said = btn.dataset.a === '1';
+      const ok = said === P[i].always;
+      $$('button', tr).forEach(b => b.className = '');
+      btn.className = ok ? 'on-ok' : 'on-ko';
+      answers[i] = ok;
+      const n = Object.keys(answers).length, good = Object.values(answers).filter(Boolean).length;
+      const fb = $('#propFb');
+      if (n === P.length) {
+        fb.className = 'fb ' + (good === P.length ? 'ok' : 'warn');
+        fb.innerHTML = good === P.length
+          ? '<b>Ben investigat.</b> El logaritme converteix el producte en suma, el quocient en resta i la potència en producte. No es reparteix sobre la suma. Compte amb els falsos amics: amb \\(a=b=2\\) la segona igualtat sembla certa (perquè \\(2+2=2\\cdot2\\)), i amb \\(a=100\\) l\'última també. Un exemple que funciona no demostra una propietat.'
+          : '<b>Revisa les marcades en vermell.</b> Busca un parell de valors que faci falsa la igualtat. Si no el trobes mai, probablement és sempre certa.';
+        typeset([fb]);
+      } else { fb.className = ''; fb.textContent = ''; }
+    });
+    ['pa', 'pb'].forEach(id => $('#' + id).addEventListener('input', upd));
+    upd();
+  })();
+
+  /* ---------- EXPLICA: passos ---------- */
+  $$('[data-steps]').forEach(box => {
+    const steps = $$('.step', box);
+    steps.forEach((s, i) => { s.hidden = i > 0; });
+    if (steps.length < 2) return;
+    const row = document.createElement('div'); row.className = 'row';
+    const next = document.createElement('button'); next.type = 'button'; next.className = 'btn'; next.textContent = 'Pas següent';
+    const all = document.createElement('button'); all.type = 'button'; all.className = 'linkbtn'; all.textContent = 'Mostra-ho tot';
+    let k = 1;
+    const refresh = () => { steps.forEach((s, i) => s.hidden = i >= k); next.disabled = k >= steps.length; all.hidden = k >= steps.length; };
+    next.addEventListener('click', () => { k++; refresh(); });
+    all.addEventListener('click', () => { k = steps.length; refresh(); });
+    row.append(next, all); box.after(row);
+  });
+  $$('[data-jump]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault(); const el = document.getElementById(a.dataset.jump); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+
+  /* ---------- targetes d'exercici ---------- */
+  const LV = { 1: 'Nivell 1 · Bàsic', 2: 'Nivell 2 · Mitjà', 3: 'Nivell 3 · Repte' };
+  const KEYS = [
+    ['log( )', 'log()', -1], ['ln( )', 'ln()', -1], ['logₐ( )', 'log_()()', -3], ['√( )', '√()', -1], ['∛( )', '∛()', -1],
+    ['^', '^()', -1], ['( )', '()', -1], ['/', '/', 0], ['·', '·', 0], ['−', '-', 0], [';', '; ', 0], ['e', 'e', 0]
+  ];
+  function insert(inp, txt, back) {
+    const s = inp.selectionStart ?? inp.value.length, e = inp.selectionEnd ?? s;
+    inp.value = inp.value.slice(0, s) + txt + inp.value.slice(e);
+    const pos = s + txt.length + back;
+    inp.focus(); inp.setSelectionRange(pos, pos);
+    inp.dispatchEvent(new Event('input'));
+  }
+  function makeCard(ex, opt) {
+    const art = document.createElement('article');
+    art.className = 'ex'; art.id = 'ex-' + ex.id; art.dataset.lvl = ex.lvl || ''; art.dataset.blk = ex.blk || ''; art.dataset.cur = ex.cur || '';
+    const head = opt.eval ? `<span class="ex-id">${ex.id}</span>` :
+      `<span class="ex-id">${ex.id}</span><span class="lvl l${ex.lvl}">${LV[ex.lvl]}</span><span class="blkname">${BLOCKS[ex.blk]}</span>${ex.cur === 'b' ? '<span class="curb">Batx</span>' : ''}`;
+    const ph = ex.type === 'sols' ? 'Valor de x (si n\'hi ha més d\'un, separa\'ls amb ;)' : 'Escriu la resposta';
+    art.innerHTML = `<div class="ex-head">${head}<span class="donebadge" hidden>✓ Resolt</span></div>
+      <p>${ex.ins}</p>
+      <div class="q">\\[${ex.q}\\]</div>
+      <div class="ans"><label class="sr" for="in-${ex.id}">Resposta de l'exercici ${ex.id}</label>
+        <input type="text" id="in-${ex.id}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${ph}">
+        <button type="button" class="btn primary" data-check>Comprova</button></div>
+      <div class="kbd">${KEYS.map((k, i) => `<button type="button" data-k="${i}" aria-label="Insereix ${k[0]}">${k[0]}</button>`).join('')}</div>
+      <div class="preview" aria-live="polite"></div>
+      <div class="fb" role="status" hidden></div>
+      ${ex.hint || ex.sol ? `<div class="tools">${ex.hint ? '<button type="button" class="linkbtn" data-hint>Pista</button>' : ''}<button type="button" class="linkbtn" data-sol disabled title="La solució es desbloqueja quan hagis fet un primer intent">Solució (després d'un intent)</button></div>` : ''}
+      ${ex.hint ? `<div class="hint" hidden><b>Pista:</b> ${ex.hint}</div>` : ''}
+      <div class="sol" hidden><b>Solució:</b> ${ex.sol.split(/\.\\ \\ /).map((p, i, a) => `<div class="step">\\(${p}${i < a.length - 1 ? '.' : ''}\\)</div>`).join('')}</div>`;
+    const inp = $('input', art), pv = $('.preview', art), fb = $('.fb', art), solB = $('[data-sol]', art);
+    let t;
+    inp.addEventListener('input', () => {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        const v = inp.value.trim();
+        if (!v) { pv.textContent = ''; return; }
+        try { pv.innerHTML = 'Així ho interpreto: <span class="pv">\\(' + LOG.preview(ex.type, v) + '\\)</span>'; typeset([pv]); }
+        catch (e) { pv.textContent = e.message; }
+      }, 180);
+    });
+    $$('.kbd button', art).forEach(b => b.addEventListener('click', () => { const k = KEYS[+b.dataset.k]; insert(inp, k[1], k[2]); }));
+    const doCheck = () => {
+      const r = LOG.check(ex, inp.value);
+      fb.hidden = false;
+      if (r.ok) { fb.className = 'fb ok'; fb.innerHTML = '<b>Correcte!</b> ' + (opt.eval ? '' : 'Pots comparar el teu procediment amb la solució.'); }
+      else if (r.kind === 'form') { fb.className = 'fb warn'; fb.innerHTML = '<b>Gairebé.</b> ' + r.msg; }
+      else if (r.kind === 'syntax') { fb.className = 'fb warn'; fb.innerHTML = '<b>No entenc la resposta.</b> ' + r.msg; }
+      else { fb.className = 'fb ko'; fb.innerHTML = '<b>Encara no.</b> ' + r.msg; }
+      typeset([fb]);
+      if (r.kind !== 'syntax' && solB && solB.disabled) { solB.disabled = false; solB.textContent = 'Solució'; solB.removeAttribute('title'); }
+      if (r.ok) { art.classList.add('done'); $('.donebadge', art).hidden = false; }
+      if (opt.onResult) opt.onResult(ex, r);
+    };
+    $('[data-check]', art).addEventListener('click', doCheck);
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); doCheck(); } });
+    const hb = $('[data-hint]', art); if (hb) hb.addEventListener('click', () => { $('.hint', art).hidden = !$('.hint', art).hidden; });
+    if (solB) solB.addEventListener('click', () => { $('.sol', art).hidden = !$('.sol', art).hidden; });
+    if (opt.done) { art.classList.add('done'); $('.donebadge', art).hidden = false; }
+    return art;
+  }
+
+  /* ---------- APLICA (les targetes es creen per blocs, quan es necessiten) ---------- */
+  const list = $('#exList');
+  const groups = {}, built = {};
+  Object.keys(BLOCKS).forEach(k => { const d = document.createElement('div'); d.className = 'exlist'; d.dataset.bgrp = k; list.appendChild(d); groups[k] = d; });
+  let fB = 'A', fL = 'all', fC = store.cur === '4t' ? 'eso' : 'all';
+  function build(k) {
+    if (built[k]) return;
+    built[k] = true;
+    const cards = EX.filter(e => e.blk === k).map(ex => makeCard(ex, {
+      done: !!store.done[ex.id],
+      onResult: (e, r) => { if (r.ok) { store.done[e.id] = 1; save(); updProgress(); } }
+    }));
+    cards.forEach(c => groups[k].appendChild(c));
+    typeset(cards);
+  }
+  function updProgress() {
+    const pool = EX.filter(e => fC === 'all' || e.cur !== 'b');
+    const d = pool.filter(e => store.done[e.id]).length;
+    $('#progTxt').textContent = d + ' de ' + pool.length + ' exercicis resolts' + (fC === 'eso' ? ' (4t ESO)' : '');
+    $('#progBar').style.width = (pool.length ? 100 * d / pool.length : 0) + '%';
+    $('#progLv').textContent = [1, 2, 3].map(l => 'N' + l + ': ' + pool.filter(e => e.lvl === l && store.done[e.id]).length + '/' + pool.filter(e => e.lvl === l).length).join(' · ');
+  }
+  function chips(box, items, get, set) {
+    box.innerHTML = items.map(([v, t]) => `<button type="button" class="chip" data-v="${v}" aria-pressed="${get() === v}">${t}</button>`).join('');
+    box.addEventListener('click', e => {
+      const b = e.target.closest('.chip'); if (!b) return;
+      set(b.dataset.v); $$('.chip', box).forEach(c => c.setAttribute('aria-pressed', c === b)); filter();
+    });
+  }
+  const paintChips = (sel, val) => $$(sel + ' .chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.v === val));
+  chips($('#fCur'), [['eso', 'Només 4t ESO'], ['all', 'Tot (amb Batxillerat)']], () => fC, v => fC = v);
+  chips($('#fBlk'), [...Object.entries(BLOCKS).map(([k, v]) => [k, k + '. ' + v]), ['all', 'Tots els blocs']], () => fB, v => fB = v);
+  chips($('#fLvl'), [['all', 'Tots els nivells'], ['1', 'Nivell 1'], ['2', 'Nivell 2'], ['3', 'Nivell 3']], () => fL, v => fL = v);
+  function filter() {
+    Object.keys(BLOCKS).forEach(k => { const show = fB === 'all' || fB === k; if (show) build(k); groups[k].hidden = !show; });
+    let vis = 0;
+    $$('.ex', list).forEach(c => {
+      const h = !((fL === 'all' || c.dataset.lvl === fL) && (fC === 'all' || c.dataset.cur !== 'b'));
+      c.hidden = h; if (!h && !c.parentElement.hidden) vis++;
+    });
+    $('#exEmpty').hidden = vis > 0;
+    updProgress();
+  }
+
+  /* curs (Inici) */
+  (function curPicker() {
+    const box = $('#curPick');
+    const paint = () => {
+      box.innerHTML = CURS.map(([v, t]) => `<button type="button" class="chip" data-v="${v}" aria-pressed="${store.cur === v}">${t}</button>`).join('');
+      $('#curMsg').textContent = store.cur ? CURMSG[store.cur] : 'Si encara no has triat el curs, veuràs tots els continguts.';
+    };
+    box.addEventListener('click', e => {
+      const b = e.target.closest('.chip'); if (!b) return;
+      store.cur = b.dataset.v; save();
+      fC = store.cur === '4t' ? 'eso' : 'all'; paintChips('#fCur', fC); filter(); paint();
+    });
+    paint();
+  })();
+  filter();
+
+  /* ---------- AVALUA ---------- */
+  const QUIZ = [
+    { q: 'Què significa \\(\\log_a x=y\\)?', o: ['\\(x^y=a\\)', '\\(y^a=x\\)', '\\(a^y=x\\)', '\\(a^x=y\\)'], c: 2,
+      f: 'El logaritme és l\'exponent al qual cal elevar la base per obtenir l\'argument: \\(a^y=x\\).' },
+    { q: 'Quant val \\(\\log_3(-9)\\)?', o: ['No existeix', '\\(-2\\)', '\\(2\\)', '\\(-3\\)'], c: 0,
+      f: 'Cap potència de base positiva dona un nombre negatiu: \\(3^y>0\\) sempre. Per tant, \\(\\log_3(-9)\\) no existeix.' },
+    { q: 'Quant val \\(\\log 0{,}001\\)?', o: ['\\(3\\)', '\\(-2\\)', '\\(0{,}001\\)', '\\(-3\\)'], c: 3,
+      f: '\\(0{,}001=10^{-3}\\), per tant \\(\\log0{,}001=-3\\).' },
+    { q: 'En Pau escriu \\(\\log(2+8)=\\log2+\\log8\\). Té raó?', o: ['Sí, sempre', 'No: el logaritme no es reparteix sobre la suma', 'Sí, perquè el logaritme es reparteix', 'Només en base 10'], c: 1,
+      f: '\\(\\log(2+8)=\\log10=1\\), però \\(\\log2+\\log8=\\log16\\approx1{,}204\\). La suma de logaritmes és el logaritme del <b>producte</b>.' },
+    { q: '\\(2\\log5+\\log4=\\)', o: ['\\(\\log14\\)', '\\(2\\)', '\\(3\\)', '\\(\\log50\\)'], c: 1,
+      f: '\\(2\\log5+\\log4=\\log25+\\log4=\\log100=2\\).' },
+    { q: 'Si \\(a>1\\) i \\(0\\lt x\\lt 1\\), el logaritme \\(\\log_a x\\) és…', o: ['negatiu', 'positiu', 'zero', 'no existeix'], c: 0,
+      f: 'Per obtenir un nombre menor que 1 amb una base més gran que 1 cal un exponent negatiu. Per exemple, \\(\\log_2\\tfrac14=-2\\).' },
+    { q: 'La solució de \\(3^x=20\\) és…', o: ['\\(x=\\tfrac{20}{3}\\)', '\\(x=\\log\\tfrac{20}{3}\\)', '\\(x=\\log_{20}3\\)', '\\(x=\\dfrac{\\log20}{\\log3}\\)'], c: 3,
+      f: 'Prenent logaritmes: \\(x\\log3=\\log20\\Rightarrow x=\\dfrac{\\log20}{\\log3}=\\log_3 20\\approx2{,}73\\).' },
+    { q: 'Resolent una equació logarítmica obtens \\(x=-2\\) i \\(x=5\\). Què has de fer?', o: ['Donar-les totes dues', 'Descartar sempre la negativa', 'Comprovar-les a l\'equació original i descartar les que facin algun argument negatiu o zero', 'Quedar-te amb la més gran'], c: 2,
+      f: 'Una solució negativa pot ser vàlida (per exemple, a \\(\\log x^2=2\\), \\(x=-10\\) ho és). El que cal és substituir cada valor i comprovar que tots els arguments són positius.' },
+    { q: 'L\'amplitud d\'un terratrèmol de magnitud 8, quantes vegades és la d\'un de magnitud 5?', o: ['1 000 vegades', '3 vegades', '1,6 vegades', '30 vegades'], c: 0,
+      f: '\\(M_1-M_2=\\log\\dfrac{A_1}{A_2}=3\\), per tant \\(\\dfrac{A_1}{A_2}=10^3=1000\\).' },
+    { q: 'Per quin punt passen totes les gràfiques \\(y=\\log_a x\\)?', o: ['\\((0,1)\\)', '\\((0,0)\\)', '\\((1,1)\\)', '\\((1,0)\\)'], c: 3,
+      f: '\\(\\log_a1=0\\) per a qualsevol base vàlida.' },
+    { q: 'Quina igualtat és certa per a qualsevol \\(a,b>0\\)?', o: ['\\(\\log(ab)=\\log a\\cdot\\log b\\)', '\\(\\log a^3=3\\log a\\)', '\\(\\log\\dfrac ab=\\dfrac{\\log a}{\\log b}\\)', '\\(\\log(a+b)=\\log a+\\log b\\)'], c: 1,
+      f: 'És la propietat de la potència. Les altres tres són errors freqüents.' }
+  ];
+  const res = {};
+  const TOTAL = QUIZ.length + EVAL_OPEN.length;
+  function updScore() {
+    const n = Object.keys(res).length, s = Object.values(res).filter(Boolean).length;
+    $('#scoreTxt').textContent = s + ' / ' + TOTAL;
+    const m = $('#scoreMsg');
+    if (n < TOTAL) m.textContent = 'Has respost ' + n + ' de ' + TOTAL + ' preguntes.';
+    else if (s >= 12) m.textContent = 'Molt bé! Domines els logaritmes. Prova els exercicis de nivell 3 i els problemes del bloc G que encara no hagis fet.';
+    else if (s >= 8) m.textContent = 'Bona feina. Repassa les preguntes que has fallat i fes els exercicis de nivell 2 d\'aquells blocs.';
+    else m.textContent = 'Torna a l\'apartat Explica i fes els exercicis de nivell 1 dels blocs que t\'han costat més.';
+  }
+  const quiz = $('#quiz');
+  QUIZ.forEach((item, i) => {
+    const box = document.createElement('div'); box.className = 'mc';
+    item.q = '<span class="kicker" style="margin-right:8px">' + (i + 1) + '</span>' + item.q;
+    renderMC(box, item, ok => { res['q' + i] = ok; updScore(); });
+    quiz.appendChild(box);
+  });
+  const eo = $('#evalOpen');
+  EVAL_OPEN.forEach(ex => eo.appendChild(makeCard(ex, {
+    eval: true,
+    onResult: (e, r) => { if (r.kind !== 'syntax' && res[e.id] === undefined) { res[e.id] = !!r.ok; updScore(); } }
+  })));
+  updScore();
+
+  const SELF = [
+    ['A', 'Calculo logaritmes aplicant la definició.'],
+    ['B', 'Trobo la base o l\'argument d\'un logaritme.'],
+    ['C', 'Aplico les propietats dels logaritmes i detecto errors com \\(\\log(a+b)=\\log a+\\log b\\).'],
+    ['D', 'Faig servir el canvi de base i la calculadora.'],
+    ['E', 'Resolc equacions exponencials.'],
+    ['F', 'Resolc equacions logarítmiques i en comprovo les solucions.'],
+    ['G', 'Plantejo i resolc problemes de context amb logaritmes, i n\'interpreto el resultat.']
+  ];
+  const sl = $('#selfList');
+  sl.innerHTML = SELF.map(([k, t]) => `<div class="self-row" data-k="${k}"><span>${t}</span><span class="light" role="group" aria-label="Nivell de domini">
+    <button type="button" data-v="g" aria-label="Ho domino">✓</button><button type="button" data-v="y" aria-label="Encara dubto">?</button><button type="button" data-v="r" aria-label="No ho sé fer">✕</button></span></div>`).join('');
+  function paintSelf() {
+    $$('.self-row', sl).forEach(r => $$('button', r).forEach(b => b.classList.toggle('on', store.self[r.dataset.k] === b.dataset.v)));
+    const weak = SELF.filter(([k]) => store.self[k] === 'r' || store.self[k] === 'y');
+    const adv = $('#selfAdvice');
+    if (!weak.length) { adv.className = ''; adv.innerHTML = ''; return; }
+    adv.className = 'fb warn';
+    adv.innerHTML = '<b>Què et proposem repassar:</b> ' + weak.map(([k]) => `<a href="#aplica" data-goblk="${k}">bloc ${k} (${BLOCKS[k]})</a>`).join(', ') + '. Comença pel nivell 1 i, quan l\'encertis, passa al 2.';
+  }
+  sl.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    const k = b.closest('.self-row').dataset.k;
+    store.self[k] = store.self[k] === b.dataset.v ? undefined : b.dataset.v; save(); paintSelf();
+  });
+  $('#selfAdvice').addEventListener('click', e => {
+    const a = e.target.closest('[data-goblk]'); if (!a) return;
+    fB = a.dataset.goblk; fL = 'all';
+    paintChips('#fBlk', fB); paintChips('#fLvl', 'all');
+    filter();
+  });
+  paintSelf();
+  const xn = $('#exitNote');
+  try { xn.value = localStorage.getItem(KEY + '-exit') || ''; } catch (e) {}
+  xn.addEventListener('input', () => { try { localStorage.setItem(KEY + '-exit', xn.value); } catch (e) {} });
+
+  route();
+})();
+
+</script>
+
+<script>
+(function(){
+  var d = document.getElementById('eas-declaracio-ia');
+  if (!d || 'popover' in HTMLElement.prototype) return;
+  d.hidden = true; d.classList.add('eas-fb');
+  document.querySelectorAll('[popovertarget="eas-declaracio-ia"]').forEach(function(b){
+    b.addEventListener('click', function(){ d.hidden = !d.hidden; if (!d.hidden) d.querySelector('.eas-tanca').focus(); });
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') d.hidden = true; });
+})();
+</script>
+</body></html>
